@@ -1,5 +1,7 @@
 package output;
 
+import input.Keyboard;
+import input.Mouse;
 import util.Util;
 
 import javax.swing.*;
@@ -33,6 +35,8 @@ public class GameFrame extends JFrame {
 
         //Screen
         getScreen().setVisible(true);
+        getScreen().addKeyListener(new Keyboard());
+        getScreen().addMouseListener(new Mouse());
 
         //GameFrame
         getGameFrame().setUndecorated(false);
