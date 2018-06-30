@@ -4,6 +4,7 @@ import entity.Player;
 import input.Keyboard;
 import input.Mouse;
 import main.GameLoop;
+import main.Main;
 import util.Util;
 import world.World;
 
@@ -40,6 +41,7 @@ public class GameFrame extends JFrame {
         getScreen().setVisible(true);
 
         //GameFrame
+        getGameFrame().setTitle(Main.gameTitle);
         getGameFrame().setUndecorated(false);
         getGameFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         getGameFrame().setLocationRelativeTo(null);

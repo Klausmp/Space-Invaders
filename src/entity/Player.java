@@ -25,7 +25,7 @@ public class Player extends Entity {
 
     @Override
     public void loadAndSetTextures() {
-        look = Renderer.getShip();
+        look = Renderer.getShip1();
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Player extends Entity {
     public boolean canShoot() {
         for (World world: Util.getWorldList()) {
             for (Bullet bullet: world.getBulletList()) {
-                if (bullet.isPlayerBullet()){
+                if (bullet.isPlayerBullet() && bullet.isAlive){
                     return false;
                 }
             }

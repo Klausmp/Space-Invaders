@@ -6,6 +6,9 @@ import world.World;
 
 public class PlayerShot extends Bullet {
 
+    public int animationTimer = 0;
+    public final int ANIMATIONTIMER = 10;
+
     public PlayerShot(int posX, int posY, double speed) {
         super(posX, posY, speed, true);
     }
@@ -21,28 +24,37 @@ public class PlayerShot extends Bullet {
 
     @Override
     public void movement() {
-        setPosY(getPosY() - speed);
-        if (getPosY_int() <= 0){
+        if (isAlive()) {
+            setPosY(getPosY() - speed);
+        }
+        if (getPosY_int() <= 30) {
             this.setAlive(false);
         }
     }
 
     @Override
     public void animation() {
-
+        if (!isAlive()){
+            look = Renderer.getShipShotDead();
+            setAnimationTimer(getAnimationTimer() + 1);
+            System.out.println(getAnimationTimer());
+        }
+        if (getANIMATIONTIMER() <= getAnimationTimer()){
+            setCanBeRemoved(true);
+        }
     }
 
     @Override
     public void hit() {
-        for (World world: Util.getWorldList()) {
-            for (Alien alien: world.alienList) {
-                if (bounding.intersects(alien.bounding)){
+        for (World world : Util.getWorldList()) {
+            for (Alien alien : world.alienList) {
+                if (bounding.intersects(alien.bounding)) {
                     alien.setAlive(false);
-                    this.setAlive(false);
+                    this.setCanBeRemoved(true);
                 }
             }
-            for (Bullet bullet: world.getBulletList()) {
-                if (bounding.intersects(bullet.bounding) && bullet != this){
+            for (Bullet bullet : world.getBulletList()) {
+                if (bounding.intersects(bullet.bounding) && bullet != this) {
                     bullet.setAlive(false);
                     this.setAlive(false);
                 }
@@ -50,6 +62,18 @@ public class PlayerShot extends Bullet {
 
 
         }
+    }
+
+    public int getAnimationTimer() {
+        return animationTimer;
+    }
+
+    public void setAnimationTimer(int animationTimer) {
+        this.animationTimer = animationTimer;
+    }
+
+    public int getANIMATIONTIMER() {
+        return ANIMATIONTIMER;
     }
 
     @Override

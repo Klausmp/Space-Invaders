@@ -18,6 +18,7 @@ public abstract class Bullet extends Entity{
     public void update() {
         movement();
         setBounds();
+        animation();
         hit();
     }
 

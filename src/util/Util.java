@@ -48,7 +48,7 @@ public class Util {
                 }
             }
             for (Bullet bullet : world.getBulletList()) {
-                if (bullet.isCanBeRemoved() || !bullet.isAlive()) {
+                if (bullet.isCanBeRemoved()) {
                     world.getDeadBulletList().add(bullet);
                 }
             }
