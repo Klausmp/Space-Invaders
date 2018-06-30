@@ -12,6 +12,7 @@ public abstract class Entity {
     public int height;
 
     public boolean isAlive = true;
+    public boolean canBeRemoved = false;
 
     public BufferedImage look;
 
@@ -36,6 +37,10 @@ public abstract class Entity {
     public abstract void update();
 
     public abstract void loadAndSetTextures();
+
+    public abstract void movement();
+
+    public abstract void animation();
 
     public void render(Graphics g) {
         g.drawImage(getLook(), getPosX_int(), getPosY_int(), getWight(), getHeight(), null);
@@ -117,5 +122,27 @@ public abstract class Entity {
 
     public void setSpeed(double speed) {
         this.speed = speed;
+    }
+
+    public boolean isCanBeRemoved() {
+        return canBeRemoved;
+    }
+
+    public void setCanBeRemoved(boolean canBeRemoved) {
+        this.canBeRemoved = canBeRemoved;
+    }
+
+    @Override
+    public String toString() {
+        return "Entity{" +
+                "posX=" + posX +
+                ", posY=" + posY +
+                ", speed=" + speed +
+                ", wight=" + wight +
+                ", height=" + height +
+                ", isAlive=" + isAlive +
+                ", look=" + look +
+                ", bounding=" + bounding +
+                '}';
     }
 }

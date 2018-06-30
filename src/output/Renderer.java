@@ -11,18 +11,18 @@ import java.io.IOException;
 public class Renderer {
 
     public static BufferedImage ship;
+    public static BufferedImage playerShot;
+
 
     public Renderer() {
         try {
-            //Entity Texture
+            //Player
             ship = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship.png"));
 
-            //Block Texture
+            //Bullet
+            playerShot = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship_shot.png"));
 
-
-            //Item Texture
-
-            //Background and other
+            //Item
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,5 +36,13 @@ public class Renderer {
 
     public static void setShip(BufferedImage ship) {
         Renderer.ship = ship;
+    }
+
+    public static BufferedImage getPlayerShot() {
+        return playerShot;
+    }
+
+    public static void setPlayerShot(BufferedImage playerShot) {
+        Renderer.playerShot = playerShot;
     }
 }

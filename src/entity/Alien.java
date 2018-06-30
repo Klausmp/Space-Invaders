@@ -1,8 +1,7 @@
 package entity;
 
-public class Item extends Entity {
-
-    public Item(int posX, int posY) {
+public class Alien extends Entity {
+    public Alien(int posX, int posY) {
         super(posX, posY);
     }
 

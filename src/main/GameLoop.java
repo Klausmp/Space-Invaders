@@ -4,14 +4,15 @@ import entity.Player;
 import input.Keyboard;
 import output.GameFrame;
 import output.Renderer;
+import util.Util;
+import world.World;
+import world.WorldOne;
 
 /**
  * @author Klausmp
  */
 
 public class GameLoop {
-
-    public static Player player;
 
     public static Renderer renderer = new Renderer();
 
@@ -39,7 +40,7 @@ public class GameLoop {
     static void init() {
         GameFrame frame = new GameFrame();
         Keyboard keyboard = new Keyboard();
-        player = new Player(250, 250, 2.5);
+        Util.getWorldList().add(new WorldOne());
     }
 
     private void gameLoop() {
@@ -95,12 +96,10 @@ public class GameLoop {
     }
 
     private void gameTick() {
-        /**
-         for (World world : World.getWorldList()) {
-         world.update();
-         }
-         Util.clearLists();*/
-        player.update();
+        Util.clearLists();
+        for (World world : Util.getWorldList()) {
+            world.update();
+        }
     }
 
     public void gameTicks() {

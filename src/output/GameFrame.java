@@ -5,6 +5,7 @@ import input.Keyboard;
 import input.Mouse;
 import main.GameLoop;
 import util.Util;
+import world.World;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,6 +65,13 @@ public class GameFrame extends JFrame {
 
     private static void background(Graphics g) {
         Util.drawBackground(g, Color.BLACK);
+        g.setColor(Color.GREEN);
+        g.drawLine(0, 416, getWindowSizeX(), 416);
+        g.drawLine(0, 417, getWindowSizeX(), 417);
+        g.drawLine(0, 418, getWindowSizeX(), 418);
+        g.drawLine(0, 419, getWindowSizeX(), 419);
+        g.drawLine(0, 420, getWindowSizeX(), 420);
+
     }
 
     public static void guiLayer(Graphics g) {
@@ -71,7 +79,9 @@ public class GameFrame extends JFrame {
     }
 
     public static void gameLayer(Graphics g) {
-        GameLoop.player.render(g);
+        for (World world: Util.getWorldList()) {
+            world.render(g);
+        }
     }
 
     public static void resizeWindow(int wight, int height) {

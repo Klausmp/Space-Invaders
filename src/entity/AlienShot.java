@@ -1,9 +1,13 @@
 package entity;
 
-public class Item extends Entity {
+public class AlienShot extends Entity {
 
-    public Item(int posX, int posY) {
-        super(posX, posY);
+    public AlienShot(int posX, int posY, double speed) {
+        super(posX, posY, speed);
+    }
+
+    public AlienShot(int posX, int posY) {
+        super(posX, posY, 4);
     }
 
     @Override
