@@ -1,5 +1,6 @@
 package main;
 
+import entity.Player;
 import input.Keyboard;
 import output.GameFrame;
 import output.Renderer;
@@ -9,6 +10,8 @@ import output.Renderer;
  */
 
 public class GameLoop {
+
+    public static Player player;
 
     public static Renderer renderer = new Renderer();
 
@@ -36,6 +39,7 @@ public class GameLoop {
     static void init() {
         GameFrame frame = new GameFrame();
         Keyboard keyboard = new Keyboard();
+        player = new Player(250, 250, 2.5);
     }
 
     private void gameLoop() {
@@ -96,6 +100,7 @@ public class GameLoop {
          world.update();
          }
          Util.clearLists();*/
+        player.update();
     }
 
     public void gameTicks() {

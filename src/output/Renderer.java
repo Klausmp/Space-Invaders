@@ -10,12 +10,12 @@ import java.io.IOException;
 
 public class Renderer {
 
-    public static BufferedImage red;
+    public static BufferedImage ship;
 
     public Renderer() {
         try {
             //Entity Texture
-            red = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/red.png"));
+            ship = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship.png"));
 
             //Block Texture
 
@@ -30,15 +30,11 @@ public class Renderer {
 
     }
 
-    public static int makeToRenderPos(int pos) {
-        return pos * 16;
+    public static BufferedImage getShip() {
+        return ship;
     }
 
-    public static BufferedImage getRed() {
-        return red;
-    }
-
-    public static void setRed(BufferedImage red) {
-        Renderer.red = red;
+    public static void setShip(BufferedImage ship) {
+        Renderer.ship = ship;
     }
 }

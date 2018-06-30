@@ -1,5 +1,7 @@
 package util;
 
+import output.GameFrame;
+
 import java.awt.*;
 
 /**
@@ -10,13 +12,19 @@ public class Util {
     public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 
-    public static Dimension getScreenSize() {
-        return screenSize;
+    public static void drawBackground(Graphics g, Color color){
+        g.setColor(color);
+        g.drawRect(0, 0, GameFrame.getWindowSizeX(), GameFrame.getWindowSizeY());
+
+        for (int i = 0; i <= GameFrame.getWindowSizeX(); i++) {
+            g.drawLine(i, 0, i, GameFrame.getWindowSizeY());
+        }
+        for (int i = 0; i <= 500; i++) {
+            g.drawLine(0, i, GameFrame.getWindowSizeX(), i);
+        }
+
     }
 
-    public static void setScreenSize(Dimension screenSize) {
-        Util.screenSize = screenSize;
-    }
 
     /**public static void clearLists() {
         for (World world : World.getWorldList()) {
@@ -48,4 +56,12 @@ public class Util {
             World.getDeadWorldList().clear();
         }
     }*/
+
+    public static Dimension getScreenSize() {
+        return screenSize;
+    }
+
+    public static void setScreenSize(Dimension screenSize) {
+        Util.screenSize = screenSize;
+    }
 }

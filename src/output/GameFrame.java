@@ -1,7 +1,9 @@
 package output;
 
+import entity.Player;
 import input.Keyboard;
 import input.Mouse;
+import main.GameLoop;
 import util.Util;
 
 import javax.swing.*;
@@ -31,12 +33,10 @@ public class GameFrame extends JFrame {
         /*Configurations*/
 
         //Windowsize ETC
-        resizeWindow(14, 14);
+        resizeWindow(500, 500);
 
         //Screen
         getScreen().setVisible(true);
-        getScreen().addKeyListener(new Keyboard());
-        getScreen().addMouseListener(new Mouse());
 
         //GameFrame
         getGameFrame().setUndecorated(false);
@@ -45,6 +45,8 @@ public class GameFrame extends JFrame {
         getGameFrame().setResizable(false);
         getGameFrame().setLayout(new BorderLayout());
         getGameFrame().add(getGamePanel(), BorderLayout.CENTER);
+        getGameFrame().addKeyListener(new Keyboard());
+        getGameFrame().addMouseListener(new Mouse());
         getGameFrame().setVisible(true);
 
 
@@ -61,7 +63,7 @@ public class GameFrame extends JFrame {
     }
 
     private static void background(Graphics g) {
-
+        Util.drawBackground(g, Color.BLACK);
     }
 
     public static void guiLayer(Graphics g) {
@@ -69,21 +71,21 @@ public class GameFrame extends JFrame {
     }
 
     public static void gameLayer(Graphics g) {
-        g.drawImage(Renderer.getRed(), 10, 10, null);
+        GameLoop.player.render(g);
     }
 
     public static void resizeWindow(int wight, int height) {
         if (Util.getScreenSize().getWidth() == 1360 && Util.getScreenSize().getHeight() == 768) {
-            wight = (wight + 2) * 16 - 10;
-            height = (height + 2) * 16 + 12;
+            wight = (wight + 2) - 10;
+            height = (height + 2) + 12;
         }
         if (Util.getScreenSize().getWidth() == 1920 && Util.getScreenSize().getHeight() == 1080) {
-            wight = (wight + 2) * 16;
-            height = (height + 2) * 16 + 23;
+            wight = (wight + 2);
+            height = (height + 2) + 23;
         }
         if (Util.getScreenSize().getWidth() == 1280 && Util.getScreenSize().getHeight() == 720) {
-            wight = (wight + 2) * 16;
-            height = (height + 2) * 16 + 23;
+            wight = (wight + 2);
+            height = (height + 2) + 23;
         }
         getScreen().setBounds(0, 0, wight, height);
         getGameFrame().setSize(wight, height);
