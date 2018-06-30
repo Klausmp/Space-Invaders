@@ -7,7 +7,7 @@ import world.World;
 public class PlayerBullet extends Bullet {
 
     public int animationTimer = 0;
-    public final int ANIMATIONTIMER = 10;
+    public final int ANIMATIONTIMER = 7;
 
     public PlayerBullet(int posX, int posY, double speed) {
         super(posX, posY, speed, true);
@@ -53,7 +53,7 @@ public class PlayerBullet extends Bullet {
                 }
             }
             for (Bullet bullet : world.getBulletList()) {
-                if (bounding.intersects(bullet.bounding) && bullet != this && isAlive()) {
+                if (bounding.intersects(bullet.bounding) && bullet != this && isAlive() && bullet.isAlive) {
                     bullet.setAlive(false);
                     this.setAlive(false);
                 }

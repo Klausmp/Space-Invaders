@@ -14,6 +14,8 @@ public class Renderer {
     public static BufferedImage shipShot;
     public static BufferedImage shipShotDead;
     public static BufferedImage alienBullet0;
+    public static BufferedImage alienBullet1;
+    public static BufferedImage alienBulledDead;
     public static BufferedImage alien2_0;
 
 
@@ -29,7 +31,8 @@ public class Renderer {
             shipShot = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship_shot.png"));
             shipShotDead = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship_shot_destroyed.png"));
             alienBullet0 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien_shot_0.png"));
-
+            alienBullet1 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien_shot_1.png"));
+            alienBulledDead = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien_shot_destroyed.png"));
 
             //Item
 
@@ -87,4 +90,19 @@ public class Renderer {
         Renderer.alienBullet0 = alienBullet0;
     }
 
+    public static BufferedImage getAlienBullet1() {
+        return alienBullet1;
+    }
+
+    public static void setAlienBullet1(BufferedImage alienBullet1) {
+        Renderer.alienBullet1 = alienBullet1;
+    }
+
+    public static BufferedImage getAlienBulledDead() {
+        return alienBulledDead;
+    }
+
+    public static void setAlienBulledDead(BufferedImage alienBulledDead) {
+        Renderer.alienBulledDead = alienBulledDead;
+    }
 }
