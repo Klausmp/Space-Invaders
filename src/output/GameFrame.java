@@ -35,7 +35,7 @@ public class GameFrame extends JFrame {
         /*Configurations*/
 
         //Windowsize ETC
-        resizeWindow(500, 500);
+        resizeWindow(400, 400);
 
         //Screen
         getScreen().setVisible(true);
@@ -68,11 +68,8 @@ public class GameFrame extends JFrame {
     private static void background(Graphics g) {
         Util.drawBackground(g, Color.BLACK);
         g.setColor(Color.GREEN);
-        g.drawLine(0, 416, getWindowSizeX(), 416);
-        g.drawLine(0, 417, getWindowSizeX(), 417);
-        g.drawLine(0, 418, getWindowSizeX(), 418);
-        g.drawLine(0, 419, getWindowSizeX(), 419);
-        g.drawLine(0, 420, getWindowSizeX(), 420);
+        g.drawLine(0, 369, getWindowSizeX(), 369);
+        g.drawLine(0, 370, getWindowSizeX(), 370);
 
     }
 

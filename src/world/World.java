@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class World {
+    public int runX = 0;
+    public int RUNX = 92;
+
+    public boolean runLeft = true;
+    public boolean firstRunn = true;
+
     public List<Bullet> bulletList = new ArrayList<Bullet>();
     public List<Bullet> deadBulletList = new ArrayList<Bullet>();
     public List<Alien> alienList = new ArrayList<Alien>();
@@ -28,6 +34,24 @@ public abstract class World {
         for (Item item : getItemList()) {
             item.update();
         }
+        if (getRUNX() <= getRunX()){
+            setRunX(0);
+            for (Alien alien: getAlienList()) {
+                alien.setPosY(alien.getPosY() + (alien.height / 2));
+            }
+            if (isRunLeft()){
+                setRunLeft(false);
+                setFirstRunn(false);
+
+            } else {
+                setRunLeft(true);
+                setFirstRunn(false);
+            }
+        }
+        if (!isFirstRunn()){
+            setRUNX(184);
+        }
+        setRunX(getRunX() + 1);
     }
 
     public void render(Graphics g) {
@@ -101,16 +125,45 @@ public abstract class World {
         this.itemList = itemList;
     }
 
+    public int getRunX() {
+        return runX;
+    }
+
+    public void setRunX(int runX) {
+        this.runX = runX;
+    }
+
+    public int getRUNX() {
+        return RUNX;
+    }
+
+    public boolean isRunLeft() {
+        return runLeft;
+    }
+
+    public void setRunLeft(boolean runLeft) {
+        this.runLeft = runLeft;
+    }
+
+    public void setRUNX(int RUNX) {
+        this.RUNX = RUNX;
+    }
+
+    public boolean isFirstRunn() {
+        return firstRunn;
+    }
+
+    public void setFirstRunn(boolean firstRunn) {
+        this.firstRunn = firstRunn;
+    }
+
     @Override
     public String toString() {
         return "World{" +
-                "bulletList=" + bulletList +
-                ", deadBulletList=" + deadBulletList +
-                ", alienList=" + alienList +
-                ", deadAlienList=" + deadAlienList +
-                ", playerList=" + playerList +
-                ", deadPlayerList=" + deadPlayerList +
-                ", itemList=" + itemList +
+                "runX=" + runX +
+                ", RUNX=" + RUNX +
+                ", runLeft=" + runLeft +
+                ", firstRunn=" + firstRunn +
                 '}';
     }
 }

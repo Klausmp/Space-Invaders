@@ -37,7 +37,6 @@ public class PlayerShot extends Bullet {
         if (!isAlive()){
             look = Renderer.getShipShotDead();
             setAnimationTimer(getAnimationTimer() + 1);
-            System.out.println(getAnimationTimer());
         }
         if (getANIMATIONTIMER() <= getAnimationTimer()){
             setCanBeRemoved(true);
@@ -48,13 +47,13 @@ public class PlayerShot extends Bullet {
     public void hit() {
         for (World world : Util.getWorldList()) {
             for (Alien alien : world.alienList) {
-                if (bounding.intersects(alien.bounding)) {
+                if (bounding.intersects(alien.bounding) && !isCanBeRemoved()) {
                     alien.setAlive(false);
                     this.setCanBeRemoved(true);
                 }
             }
             for (Bullet bullet : world.getBulletList()) {
-                if (bounding.intersects(bullet.bounding) && bullet != this) {
+                if (bounding.intersects(bullet.bounding) && bullet != this && isAlive()) {
                     bullet.setAlive(false);
                     this.setAlive(false);
                 }

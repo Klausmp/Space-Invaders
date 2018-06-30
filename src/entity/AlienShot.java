@@ -1,20 +1,17 @@
 package entity;
 
-public class AlienShot extends Entity {
+import output.GameFrame;
 
-    public AlienShot(int posX, int posY, double speed) {
-        super(posX, posY, speed);
-    }
+public class AlienShot extends Bullet {
 
-    public AlienShot(int posX, int posY) {
-        super(posX, posY, 4);
+    public AlienShot(int posX, int posY, boolean isPlayerBullet) {
+        super(posX, posY, 5, isPlayerBullet);
     }
 
     @Override
-    public void update() {
+    public void hit() {
 
     }
-
     @Override
     public void loadAndSetTextures() {
 
@@ -22,7 +19,10 @@ public class AlienShot extends Entity {
 
     @Override
     public void movement() {
-
+        setPosY(getPosY() + speed);
+        if (getPosY_int() <= GameFrame.getWindowSizeY()){
+            this.setAlive(false);
+        }
     }
 
     @Override
