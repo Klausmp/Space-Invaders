@@ -55,14 +55,14 @@ public class GameLoop {
             unprocessedRender += (now - then) / nsPerRenderTick;
             then = now;
 
-            while (unprocessed >= 1) {
-                if (gameRunning) {
+            while (getUnprocessed() >= 1) {
+                if (isGameRunning()) {
                     gameTick();
                     gameTicks();
                 }
                 guiTick();
-                tps++;
-                unprocessed--;
+                setTps(getTps() + 1);
+                setUnprocessed(getUnprocessed() - 1);
             }
 
             try {
@@ -71,18 +71,18 @@ public class GameLoop {
                 e.printStackTrace();
             }
             gameRender();
-            while (unprocessedRender >= 1) {
+            while (getUnprocessedRender() >= 1) {
                 gameRender();
-                fps++;
-                unprocessedRender--;
+                setFps(getFps() + 1);
+                setUnprocessedRender(getUnprocessedRender() - 1);
             }
 
 
-            if (System.currentTimeMillis() - fpsTimer >= 1000) {
-                System.out.println("FPS: " + fps);
-                fps = 0;
-                tps = 0;
-                fpsTimer += 1000;
+            if (System.currentTimeMillis() - getFpsTimer() >= 1000) {
+                System.out.println("FPS: " + getFps());
+                setFps(0);
+                setTps(0);
+                setFpsTimer(getFpsTimer() + 1000);
             }
         }
     }
@@ -104,9 +104,9 @@ public class GameLoop {
     }
 
     public void gameTicks() {
-        currentTick++;
-        if (currentTick >= TPS + 1) {
-            currentTick = 1;
+        setCurrentTick(getCurrentTick() + 1);
+        if (getCurrentTick() >= getTPS() + 1) {
+            setCurrentTick(1);
         }
     }
 
@@ -206,4 +206,5 @@ public class GameLoop {
     public static int getFPS() {
         return FPS;
     }
+
 }
