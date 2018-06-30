@@ -4,16 +4,16 @@ import output.Renderer;
 import util.Util;
 import world.World;
 
-public class PlayerShot extends Bullet {
+public class PlayerBullet extends Bullet {
 
     public int animationTimer = 0;
     public final int ANIMATIONTIMER = 10;
 
-    public PlayerShot(int posX, int posY, double speed) {
+    public PlayerBullet(int posX, int posY, double speed) {
         super(posX, posY, speed, true);
     }
 
-    public PlayerShot(int posX, int posY) {
+    public PlayerBullet(int posX, int posY) {
         super(posX, posY, 7.5, true);
     }
 
@@ -77,7 +77,7 @@ public class PlayerShot extends Bullet {
 
     @Override
     public String toString() {
-        return "PlayerShot{" +
+        return "PlayerBullet{" +
                 "isPlayerBullet=" + isPlayerBullet +
                 ", posX=" + posX +
                 ", posY=" + posY +

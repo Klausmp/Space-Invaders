@@ -49,7 +49,7 @@ public class Player extends Entity {
         if (canShoot()) {
             if (Keyboard.isKeyDown(KeyEvent.VK_SPACE) || Keyboard.isKeyDown(KeyEvent.VK_W) || Keyboard.isKeyDown(KeyEvent.VK_UP)) {
                 for (World world : Util.getWorldList()) {
-                    world.bulletList.add(new PlayerShot(getPosX_int() + (getWight() / 2 - 3), getPosY_int()));
+                    world.bulletList.add(new PlayerBullet(getPosX_int() + (getWight() / 2 - 3), getPosY_int()));
                 }
             }
         }

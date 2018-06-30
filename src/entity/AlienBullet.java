@@ -1,10 +1,11 @@
 package entity;
 
 import output.GameFrame;
+import output.Renderer;
 
-public class AlienShot extends Bullet {
+public class AlienBullet extends Bullet {
 
-    public AlienShot(int posX, int posY, boolean isPlayerBullet) {
+    public AlienBullet(int posX, int posY, boolean isPlayerBullet) {
         super(posX, posY, 5, isPlayerBullet);
     }
 
@@ -14,7 +15,7 @@ public class AlienShot extends Bullet {
     }
     @Override
     public void loadAndSetTextures() {
-
+        look = Renderer.getAlienBullet0();
     }
 
     @Override

@@ -28,18 +28,18 @@ public abstract class World {
         for (Player player : getPlayerList()) {
             player.update();
         }
-        for (Bullet bullet: getBulletList()) {
+        for (Bullet bullet : getBulletList()) {
             bullet.update();
         }
         for (Item item : getItemList()) {
             item.update();
         }
-        if (getRUNX() <= getRunX()){
+        if (getRUNX() <= getRunX()) {
             setRunX(0);
-            for (Alien alien: getAlienList()) {
-                alien.setPosY(alien.getPosY() + (alien.height / 2));
+            for (Alien alien : getAlienList()) {
+                alien.setPosY(alien.getPosY() + (alien.height / 3));
             }
-            if (isRunLeft()){
+            if (isRunLeft()) {
                 setRunLeft(false);
                 setFirstRunn(false);
 
@@ -48,7 +48,7 @@ public abstract class World {
                 setFirstRunn(false);
             }
         }
-        if (!isFirstRunn()){
+        if (!isFirstRunn()) {
             setRUNX(184);
         }
         setRunX(getRunX() + 1);
@@ -61,7 +61,7 @@ public abstract class World {
         for (Player player : getPlayerList()) {
             player.render(g);
         }
-        for (Bullet bullet: getBulletList()) {
+        for (Bullet bullet : getBulletList()) {
             bullet.render(g);
         }
         for (Item item : getItemList()) {

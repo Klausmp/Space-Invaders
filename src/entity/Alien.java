@@ -5,6 +5,8 @@ import util.Util;
 import world.World;
 
 public class Alien extends Entity {
+    public final int SHOTDELAY = 10;
+    public int shotDelay = 0;
     public Alien(int posX, int posY) {
         super(posX, posY, 0.5);
     }
@@ -13,6 +15,20 @@ public class Alien extends Entity {
     public void update() {
         movement();
         setBounds();
+        shoot();
+    }
+
+    public void shoot(){
+        if ((int) (Math.random() * 149 + 1) == 50 && getSHOTDELAY() <= getShotDelay()){
+            setShotDelay(0);
+            for (World world: Util.getWorldList()) {
+                world.getBulletList().add(new AlienBullet(getPosX_int() + (getWight() / 2), getPosY_int() - getHeight(), false));
+            }
+        }
+        if (getSHOTDELAY() == getShotDelay()){
+            setShotDelay(0);
+        }
+        setShotDelay(getShotDelay() + 1);
     }
 
     @Override
@@ -34,5 +50,33 @@ public class Alien extends Entity {
     @Override
     public void animation() {
 
+    }
+
+    public int getSHOTDELAY() {
+        return SHOTDELAY;
+    }
+
+    public int getShotDelay() {
+        return shotDelay;
+    }
+
+    public void setShotDelay(int shotDelay) {
+        this.shotDelay = shotDelay;
+    }
+
+    @Override
+    public String toString() {
+        return "Alien{" +
+                "SHOTDELAY=" + SHOTDELAY +
+                ", shotDelay=" + shotDelay +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                ", speed=" + speed +
+                ", wight=" + wight +
+                ", height=" + height +
+                ", isAlive=" + isAlive +
+                ", canBeRemoved=" + canBeRemoved +
+                ", bounding=" + bounding +
+                '}';
     }
 }
