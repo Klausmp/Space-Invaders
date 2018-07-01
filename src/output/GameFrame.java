@@ -72,13 +72,34 @@ public class GameFrame extends JFrame {
     }
 
     public static void guiLayer(Graphics g) {
-        g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
-        if (Util.getWorldList().isEmpty()){
+        if (Util.getWorldList().isEmpty()) {
+            g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
             g.drawString("Press Enter to Start", 121, 300);
         }
         for (World world : Util.getWorldList()) {
             if (world.getPlayerList().isEmpty()) {
+                g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
                 g.drawString("Press Enter to Continue", 106, 300);
+            }
+        }
+        g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 9));
+        g.drawString("L I V E S :", 0, getWindowSizeY() - 43);
+        for (World world : Util.getWorldList()) {
+            switch (world.getLives()) {
+                case 3:
+                    g.drawImage(Renderer.getShipLives(), 50, getWindowSizeY() - 50, null);
+                    g.drawImage(Renderer.getShipLives(), 65, getWindowSizeY() - 50, null);
+                    g.drawImage(Renderer.getShipLives(), 80, getWindowSizeY() - 50, null);
+                    break;
+                case 2:
+                    g.drawImage(Renderer.getShipLives(), 50, getWindowSizeY() - 50, null);
+                    g.drawImage(Renderer.getShipLives(), 65, getWindowSizeY() - 50, null);
+                    break;
+                case 1:
+                    g.drawImage(Renderer.getShipLives(), 50, getWindowSizeY() - 50, null);
+                    break;
+                default:
+                    break;
             }
         }
     }
