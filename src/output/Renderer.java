@@ -16,13 +16,25 @@ public class Renderer {
     public static BufferedImage alienBullet0;
     public static BufferedImage alienBullet1;
     public static BufferedImage alienBulledDead;
+    public static BufferedImage alien1_0;
+    public static BufferedImage alien1_1;
     public static BufferedImage alien2_0;
+    public static BufferedImage alien2_1;
+    public static BufferedImage alien3_0;
+    public static BufferedImage alien3_1;
+    public static BufferedImage alienDestroyed;
 
 
     public Renderer() {
         try {
             //Alien
+            alien1_0 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien1_0.png"));
+            alien1_1 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien1_1.png"));
             alien2_0 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien2_0.png"));
+            alien2_1 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien2_1.png"));
+            alien3_0 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien3_0.png"));
+            alien3_1 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien3_1.png"));
+            alienDestroyed = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien_destroyed.png"));
 
             //Player
             ship1 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship.png"));
@@ -104,5 +116,53 @@ public class Renderer {
 
     public static void setAlienBulledDead(BufferedImage alienBulledDead) {
         Renderer.alienBulledDead = alienBulledDead;
+    }
+
+    public static BufferedImage getAlien2_1() {
+        return alien2_1;
+    }
+
+    public static void setAlien2_1(BufferedImage alien2_1) {
+        Renderer.alien2_1 = alien2_1;
+    }
+
+    public static BufferedImage getAlien3_0() {
+        return alien3_0;
+    }
+
+    public static void setAlien3_0(BufferedImage alien3_0) {
+        Renderer.alien3_0 = alien3_0;
+    }
+
+    public static BufferedImage getAlien3_1() {
+        return alien3_1;
+    }
+
+    public static void setAlien3_1(BufferedImage alien3_1) {
+        Renderer.alien3_1 = alien3_1;
+    }
+
+    public static BufferedImage getAlienDestroyed() {
+        return alienDestroyed;
+    }
+
+    public static void setAlienDestroyed(BufferedImage alienDestroyed) {
+        Renderer.alienDestroyed = alienDestroyed;
+    }
+
+    public static BufferedImage getAlien1_0() {
+        return alien1_0;
+    }
+
+    public static void setAlien1_0(BufferedImage alien1_0) {
+        Renderer.alien1_0 = alien1_0;
+    }
+
+    public static BufferedImage getAlien1_1() {
+        return alien1_1;
+    }
+
+    public static void setAlien1_1(BufferedImage alien1_1) {
+        Renderer.alien1_1 = alien1_1;
     }
 }

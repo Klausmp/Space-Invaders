@@ -10,8 +10,8 @@ public class AlienBullet extends Bullet {
     public final int ANIMATIONTIMER = 6;
     public boolean animationLeft = true;
 
-    public AlienBullet(int posX, int posY, boolean isPlayerBullet) {
-        super(posX, posY, 4, isPlayerBullet);
+    public AlienBullet(int posX, int posY) {
+        super(posX, posY, 4, false);
     }
 
     @Override
@@ -26,9 +26,10 @@ public class AlienBullet extends Bullet {
 
     @Override
     public void movement() {
-        setPosY(getPosY() + speed);
+        if (isAlive()) {
+            setPosY(getPosY() + speed);
+        }
         if (getPosY_int() >= GameFrame.getWindowSizeY()) {
-            System.out.println("hit");
             this.setAlive(false);
         }
     }

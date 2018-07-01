@@ -37,7 +37,7 @@ public abstract class World {
         if (getRUNX() <= getRunX()) {
             setRunX(0);
             for (Alien alien : getAlienList()) {
-                alien.setPosY(alien.getPosY() + (alien.height / 3));
+               alien.setPosY(alien.getPosY() + (alien.height / 3));
             }
             if (isRunLeft()) {
                 setRunLeft(false);

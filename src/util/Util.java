@@ -43,7 +43,7 @@ public class Util {
                 }
             }
             for (Alien alien : world.getAlienList()) {
-                if (alien.isCanBeRemoved() || !alien.isAlive) {
+                if (alien.isCanBeRemoved()) {
                     world.getDeadAlienList().add(alien);
                 }
             }

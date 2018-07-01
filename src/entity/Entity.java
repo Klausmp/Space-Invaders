@@ -18,18 +18,19 @@ public abstract class Entity {
 
     public Rectangle bounding = new Rectangle();
 
-
+    public Entity() {
+    }
     public Entity(int posX, int posY) {
-        this.posX = posX;
-        this.posY = posY;
+        setPosX(posX);
+        setPosY(posY);
         loadAndSetTextures();
         setBounds();
     }
 
     public Entity(int posX, int posY, double speed) {
-        this.posX = posX;
-        this.posY = posY;
-        this.speed = speed;
+        setPosX(posX);
+        setPosY(posY);
+        setSpeed(speed);
         loadAndSetTextures();
         setBounds();
     }
