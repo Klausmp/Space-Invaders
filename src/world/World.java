@@ -1,17 +1,24 @@
 package world;
 
 import entity.*;
+import input.Keyboard;
+import output.GameFrame;
+import util.Util;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class World {
     public int runX = 0;
     public int RUNX = 92;
+    public int lives = 3;
 
     public boolean runLeft = true;
     public boolean firstRunn = true;
+    public boolean isGameRunning = false;
+    public boolean isRendert = true;
 
     public List<Bullet> bulletList = new ArrayList<Bullet>();
     public List<Bullet> deadBulletList = new ArrayList<Bullet>();
@@ -22,50 +29,86 @@ public abstract class World {
     public List<Item> itemList = new ArrayList<Item>();
 
     public void update() {
-        for (Alien alien : getAlienList()) {
-            alien.update();
-        }
         for (Player player : getPlayerList()) {
+            if (!player.isAlive()) {
+                setGameRunning(false);
+            }
             player.update();
         }
-        for (Bullet bullet : getBulletList()) {
-            bullet.update();
-        }
-        for (Item item : getItemList()) {
-            item.update();
-        }
-        if (getRUNX() <= getRunX()) {
-            setRunX(0);
+        if (isGameRunning()) {
             for (Alien alien : getAlienList()) {
-               alien.setPosY(alien.getPosY() + (alien.height / 3));
+                alien.update();
             }
-            if (isRunLeft()) {
-                setRunLeft(false);
-                setFirstRunn(false);
+            for (Bullet bullet : getBulletList()) {
+                bullet.update();
+            }
+            for (Item item : getItemList()) {
+                item.update();
+            }
+            if (getRUNX() <= getRunX()) {
+                setRunX(0);
+                for (Alien alien : getAlienList()) {
+                    alien.setPosY(alien.getPosY() + (alien.height / 3));
+                }
+                if (isRunLeft()) {
+                    setRunLeft(false);
+                    setFirstRunn(false);
 
-            } else {
-                setRunLeft(true);
-                setFirstRunn(false);
+                } else {
+                    setRunLeft(true);
+                    setFirstRunn(false);
+                }
+            }
+            if (!isFirstRunn()) {
+                setRUNX(184);
+            }
+            setRunX(getRunX() + 1);
+        } else {
+            for (Bullet bullet : getBulletList()) {
+                getDeadBulletList().add(bullet);
             }
         }
-        if (!isFirstRunn()) {
-            setRUNX(184);
+
+        if (Keyboard.isKeyDown(KeyEvent.VK_ENTER) && getPlayerList().isEmpty() && getLives() > 0) {
+            getPlayerList().add(new Player((GameFrame.getWindowSizeX() / 2) - 12, 350));
+            setGameRunning(true);
         }
-        setRunX(getRunX() + 1);
+        if (getLives() <= 0) {
+            remove();
+        }
+
+    }
+
+    public void remove() {
+        System.out.println("hit");
+        for (World world : Util.getWorldList()) {
+            Util.getDeadWorldList().add(world);
+            for (Player player : world.getPlayerList()) {
+                player.setCanBeRemoved(true);
+            }
+            for (Bullet bullet : world.getBulletList()) {
+                bullet.setCanBeRemoved(true);
+            }
+            for (Alien alien : world.getAlienList()) {
+                alien.setCanBeRemoved(true);
+            }
+        }
     }
 
     public void render(Graphics g) {
-        for (Alien alien : getAlienList()) {
-            alien.render(g);
-        }
-        for (Player player : getPlayerList()) {
-            player.render(g);
-        }
-        for (Bullet bullet : getBulletList()) {
-            bullet.render(g);
-        }
-        for (Item item : getItemList()) {
-            item.render(g);
+        if (isRendert) {
+            for (Alien alien : getAlienList()) {
+                alien.render(g);
+            }
+            for (Player player : getPlayerList()) {
+                player.render(g);
+            }
+            for (Bullet bullet : getBulletList()) {
+                bullet.render(g);
+            }
+            for (Item item : getItemList()) {
+                item.render(g);
+            }
         }
     }
 
@@ -155,6 +198,22 @@ public abstract class World {
 
     public void setFirstRunn(boolean firstRunn) {
         this.firstRunn = firstRunn;
+    }
+
+    public boolean isGameRunning() {
+        return isGameRunning;
+    }
+
+    public void setGameRunning(boolean gameRunning) {
+        isGameRunning = gameRunning;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     @Override

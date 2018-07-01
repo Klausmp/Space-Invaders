@@ -1,9 +1,7 @@
 package output;
 
-import entity.Player;
 import input.Keyboard;
 import input.Mouse;
-import main.GameLoop;
 import main.Main;
 import util.Util;
 import world.World;
@@ -74,11 +72,19 @@ public class GameFrame extends JFrame {
     }
 
     public static void guiLayer(Graphics g) {
-        g.setPaintMode();
+        g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
+        if (Util.getWorldList().isEmpty()){
+            g.drawString("Press Enter to Start", 121, 300);
+        }
+        for (World world : Util.getWorldList()) {
+            if (world.getPlayerList().isEmpty()) {
+                g.drawString("Press Enter to Continue", 106, 300);
+            }
+        }
     }
 
     public static void gameLayer(Graphics g) {
-        for (World world: Util.getWorldList()) {
+        for (World world : Util.getWorldList()) {
             world.render(g);
         }
     }

@@ -10,7 +10,9 @@ import java.io.IOException;
 
 public class Renderer {
 
-    public static BufferedImage ship1;
+    public static BufferedImage ship;
+    public static BufferedImage shipDead0;
+    public static BufferedImage shipDead1;
     public static BufferedImage shipShot;
     public static BufferedImage shipShotDead;
     public static BufferedImage alienBullet0;
@@ -37,7 +39,9 @@ public class Renderer {
             alienDestroyed = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien_destroyed.png"));
 
             //Player
-            ship1 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship.png"));
+            ship = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship.png"));
+            shipDead0 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship_destroyed_0.png"));
+            shipDead1 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship_destroyed_1.png"));
 
             //Bullet
             shipShot = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/ship_shot.png"));
@@ -54,12 +58,12 @@ public class Renderer {
 
     }
 
-    public static BufferedImage getShip1() {
-        return ship1;
+    public static BufferedImage getShip() {
+        return ship;
     }
 
-    public static void setShip1(BufferedImage ship1) {
-        Renderer.ship1 = ship1;
+    public static void setShip(BufferedImage ship) {
+        Renderer.ship = ship;
     }
 
     public static BufferedImage getPlayerShot() {
@@ -164,5 +168,21 @@ public class Renderer {
 
     public static void setAlien1_1(BufferedImage alien1_1) {
         Renderer.alien1_1 = alien1_1;
+    }
+
+    public static BufferedImage getShipDead0() {
+        return shipDead0;
+    }
+
+    public static void setShipDead0(BufferedImage shipDead0) {
+        Renderer.shipDead0 = shipDead0;
+    }
+
+    public static BufferedImage getShipDead1() {
+        return shipDead1;
+    }
+
+    public static void setShipDead1(BufferedImage shipDead1) {
+        Renderer.shipDead1 = shipDead1;
     }
 }

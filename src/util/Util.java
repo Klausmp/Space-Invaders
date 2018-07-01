@@ -38,7 +38,7 @@ public class Util {
     public static void clearLists() {
         for (World world : Util.getWorldList()) {
             for (Player player : world.getPlayerList()) {
-                if (player.isCanBeRemoved() || !player.isAlive()) {
+                if (player.isCanBeRemoved()) {
                     world.getDeadPlayerList().add(player);
                 }
             }
@@ -64,8 +64,12 @@ public class Util {
                 world.getBulletList().removeAll(world.getDeadBulletList());
                 world.getDeadBulletList().clear();
             }
-        }
 
+        }
+        if (!getDeadWorldList().isEmpty()){
+            getWorldList().removeAll(getDeadWorldList());
+            deadWorldList.clear();
+        }
     }
 
     public static Dimension getScreenSize() {

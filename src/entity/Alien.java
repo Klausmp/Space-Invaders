@@ -25,7 +25,7 @@ public class Alien extends Entity {
         setSpeed(0.5);
         loadAndSetTextures();
         setBounds();
-        System.out.println(getANIMATIONSTART());
+
     }
 
     public Alien(int posX, int posY) {

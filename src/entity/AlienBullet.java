@@ -2,13 +2,15 @@ package entity;
 
 import output.GameFrame;
 import output.Renderer;
+import util.Util;
+import world.World;
 
 public class AlienBullet extends Bullet {
     public int deadAnimationTimer = 0;
     public final int DEADANIMATIONTIMER = 7;
     public int animationTimer = 0;
     public final int ANIMATIONTIMER = 6;
-    public boolean animationLeft = true;
+    public boolean animationStatus = true;
 
     public AlienBullet(int posX, int posY) {
         super(posX, posY, 4, false);
@@ -16,7 +18,15 @@ public class AlienBullet extends Bullet {
 
     @Override
     public void hit() {
+        for (World world: Util.getWorldList()) {
+            for (Player player: world.getPlayerList()) {
+                if (getBounding().intersects(player.getBounding())){
+                    this.setCanBeRemoved(true);
+                    player.setAlive(false);
 
+                }
+            }
+        }
     }
 
     @Override
@@ -38,13 +48,13 @@ public class AlienBullet extends Bullet {
     public void animation() {
         setAnimationTimer(getAnimationTimer() + 1);
         if (getANIMATIONTIMER() == getAnimationTimer()) {
-            if (isAnimationLeft()) {
+            if (isAnimationStatus()) {
                 look = Renderer.getAlienBullet0();
-                setAnimationLeft(false);
+                setAnimationStatus(false);
                 setAnimationTimer(0);
             } else {
                 look = Renderer.getAlienBullet1();
-                setAnimationLeft(true);
+                setAnimationStatus(true);
                 setAnimationTimer(0);
             }
         }
@@ -81,12 +91,12 @@ public class AlienBullet extends Bullet {
         return ANIMATIONTIMER;
     }
 
-    public boolean isAnimationLeft() {
-        return animationLeft;
+    public boolean isAnimationStatus() {
+        return animationStatus;
     }
 
-    public void setAnimationLeft(boolean animationLeft) {
-        this.animationLeft = animationLeft;
+    public void setAnimationStatus(boolean animationStatus) {
+        this.animationStatus = animationStatus;
     }
 
     @Override

@@ -8,6 +8,8 @@ import util.Util;
 import world.World;
 import world.WorldOne;
 
+import java.awt.event.KeyEvent;
+
 /**
  * @author Klausmp
  */
@@ -40,7 +42,6 @@ public class GameLoop {
     static void init() {
         GameFrame frame = new GameFrame();
         Keyboard keyboard = new Keyboard();
-        Util.getWorldList().add(new WorldOne());
     }
 
     private void gameLoop() {
@@ -99,6 +100,10 @@ public class GameLoop {
         Util.clearLists();
         for (World world : Util.getWorldList()) {
             world.update();
+        }
+        if (Util.getWorldList().isEmpty() && Keyboard.isKeyDown(KeyEvent.VK_ENTER)){
+
+            Util.getWorldList().add(new WorldOne());
         }
     }
 
