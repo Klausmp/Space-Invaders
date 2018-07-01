@@ -85,6 +85,7 @@ public class Alien extends Entity {
                     }
                     break;
                 default:
+                    System.out.println("Wrong Alien Type!!");
                     setLook(Renderer.getAlien2_0());
                     break;
             }
@@ -103,6 +104,22 @@ public class Alien extends Entity {
             setDeadAnimationTimer(getDeadAnimationTimer() + 1);
         }
         if (getDEADANIMATIONTIMER() <= getDeadAnimationTimer()) {
+            for (World world : Util.getWorldList()) {
+                switch (getAlienType()) {
+                    case 1:
+                        world.setScore(world.getScore() + 30);
+                        break;
+                    case 2:
+                        world.setScore(world.getScore() + 20);
+                        break;
+                    case 3:
+                        world.setScore(world.getScore() + 10);
+                        break;
+                    default:
+                        System.out.println("Wrong Alien Type!!");
+                        break;
+                }
+            }
             setCanBeRemoved(true);
         }
     }
@@ -120,6 +137,7 @@ public class Alien extends Entity {
                 setLook(Renderer.getAlien3_0());
                 break;
             default:
+                System.out.println("Wrong Alien Type!!");
                 setLook(Renderer.getAlien2_0());
                 break;
         }

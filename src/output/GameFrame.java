@@ -77,14 +77,14 @@ public class GameFrame extends JFrame {
             g.drawString("Press Enter to Start", 121, 300);
         }
         for (World world : Util.getWorldList()) {
-            if (world.getPlayerList().isEmpty()) {
+            if (!world.isGameRunning()) {
                 g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
                 g.drawString("Press Enter to Continue", 106, 300);
             }
         }
         g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 9));
-        g.drawString("L I V E S :", 0, getWindowSizeY() - 43);
         for (World world : Util.getWorldList()) {
+            g.drawString("L I V E S :", 0, getWindowSizeY() - 43);
             switch (world.getLives()) {
                 case 3:
                     g.drawImage(Renderer.getShipLives(), 50, getWindowSizeY() - 50, null);
@@ -99,8 +99,15 @@ public class GameFrame extends JFrame {
                     g.drawImage(Renderer.getShipLives(), 50, getWindowSizeY() - 50, null);
                     break;
                 default:
+                    System.out.println("Wrong Live Count!!");
                     break;
             }
+        }
+        g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 15));
+        g.drawString("SCORE: ", 25, 15);
+        for (World world : Util.getWorldList()) {
+            g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 15));
+            g.drawString("" + world.getScore(), 125, 15);
         }
     }
 

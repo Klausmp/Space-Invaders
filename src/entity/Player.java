@@ -1,6 +1,7 @@
 package entity;
 
 import input.Keyboard;
+import output.GameFrame;
 import output.Renderer;
 import util.Util;
 import world.World;
@@ -39,10 +40,15 @@ public class Player extends Entity {
         if (isAlive()) {
             if (Keyboard.isKeyDown(KeyEvent.VK_LEFT) || Keyboard.isKeyDown(KeyEvent.VK_A)) {
                 setPosX(getPosX() - getSpeed());
-
+                if (getPosX() <= 0) {
+                    setPosX(0);
+                }
             }
             if (Keyboard.isKeyDown(KeyEvent.VK_RIGHT) || Keyboard.isKeyDown(KeyEvent.VK_D)) {
                 setPosX(getPosX() + getSpeed());
+                if (getPosX() >= GameFrame.getWindowSizeX() - getWight() - 16) {
+                    setPosX(GameFrame.getWindowSizeX() - getWight() - 16);
+                }
             }
             setBounds();
         }

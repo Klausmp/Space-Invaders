@@ -27,7 +27,7 @@ public class PlayerBullet extends Bullet {
         if (isAlive()) {
             setPosY(getPosY() - speed);
         }
-        if (getPosY_int() <= 30) {
+        if (getPosY_int() <= 20) {
             this.setAlive(false);
         }
     }
