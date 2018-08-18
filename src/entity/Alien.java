@@ -41,7 +41,7 @@ public class Alien extends Entity {
     }
 
     public void shoot() {
-        if ((int) (Math.random() * 149 + 1) == 50 && getSHOTDELAY() <= getShotDelay()) {
+        if ((int) (Math.random() * 109 + 1) == 50 && getSHOTDELAY() <= getShotDelay()) {
             setShotDelay(0);
             for (World world : Util.getWorldList()) {
                 world.getBulletList().add(new AlienBullet(getPosX_int() + (getWight() / 2), getPosY_int() - getHeight()));
@@ -85,7 +85,7 @@ public class Alien extends Entity {
                     }
                     break;
                 default:
-                    System.out.println("Wrong Alien Type!!");
+                    System.out.println("Wrong Alien Type!! (Animation)");
                     setLook(Renderer.getAlien2_0());
                     break;
             }
@@ -116,7 +116,7 @@ public class Alien extends Entity {
                         world.setScore(world.getScore() + 10);
                         break;
                     default:
-                        System.out.println("Wrong Alien Type!!");
+                        System.out.println("Wrong Alien Type!! (Dead Animation)");
                         break;
                 }
             }
@@ -137,7 +137,7 @@ public class Alien extends Entity {
                 setLook(Renderer.getAlien3_0());
                 break;
             default:
-                System.out.println("Wrong Alien Type!!");
+                System.out.println("Wrong Alien Type!! (Init)");
                 setLook(Renderer.getAlien2_0());
                 break;
         }

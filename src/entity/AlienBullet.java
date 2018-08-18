@@ -13,7 +13,7 @@ public class AlienBullet extends Bullet {
     public boolean animationStatus = true;
 
     public AlienBullet(int posX, int posY) {
-        super(posX, posY, 4, false);
+        super(posX, posY, 5, false);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package main;
 
-import entity.Player;
 import input.Keyboard;
 import output.GameFrame;
 import output.Renderer;
@@ -35,16 +34,16 @@ public class GameLoop {
     private static final int TPS = 60;
     private static final int FPS = 60;
 
-    void run() {
+    public void run() {
         gameLoop();
     }
 
-    static void init() {
+    public void init() {
         GameFrame frame = new GameFrame();
         Keyboard keyboard = new Keyboard();
     }
 
-    private void gameLoop() {
+    private static void gameLoop() {
         fps = 0;
         tps = 0;
         fpsTimer = System.currentTimeMillis();
@@ -89,25 +88,25 @@ public class GameLoop {
         }
     }
 
-    private void gameRender() {
+    private static void gameRender() {
         GameFrame.repaintScreen();
     }
 
-    private void guiTick() {
+    private static void guiTick() {
     }
 
-    private void gameTick() {
+    private static void gameTick() {
         Util.clearLists();
         for (World world : Util.getWorldList()) {
             world.update();
         }
-        if (Util.getWorldList().isEmpty() && Keyboard.isKeyDown(KeyEvent.VK_ENTER)){
+        if (Util.getWorldList().isEmpty() && Keyboard.isKeyDown(KeyEvent.VK_ENTER)) {
 
             Util.getWorldList().add(new WorldOne());
         }
     }
 
-    public void gameTicks() {
+    public static void gameTicks() {
         setCurrentTick(getCurrentTick() + 1);
         if (getCurrentTick() >= getTPS() + 1) {
             setCurrentTick(1);

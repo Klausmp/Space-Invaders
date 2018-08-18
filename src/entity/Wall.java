@@ -1,6 +1,13 @@
 package entity;
 
 public class Wall extends Entity {
+    public int wallType;
+
+    public Wall(int posX, int posY, int wallType) {
+        super(posX, posY);
+        setWallType(wallType);
+    }
+
     @Override
     public void update() {
 
@@ -19,5 +26,13 @@ public class Wall extends Entity {
     @Override
     public void animation() {
 
+    }
+
+    public int getWallType() {
+        return wallType;
+    }
+
+    public void setWallType(int wallType) {
+        this.wallType = wallType;
     }
 }

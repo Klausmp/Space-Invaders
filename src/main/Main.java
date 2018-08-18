@@ -7,10 +7,11 @@ package main;
 public class Main {
     public static final String gameTitle = "Space Invaders";
     public static int highScore = 0;
+    public static GameLoop gameLoop = new GameLoop();
 
     public static void main(String[] args) {
-        new GameLoop().init();
-        new GameLoop().run();
+        gameLoop.init();
+        gameLoop.run();
     }
 
     public static String getGameTitle() {
