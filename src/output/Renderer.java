@@ -124,6 +124,8 @@ public class Renderer extends JFrame {
                 case 1:
                     g.drawImage(Renderer.getShipLives(), 50, getWindowSizeY() - 50, null);
                     break;
+                case 0:
+                    break;
                 default:
                     System.out.println("Wrong Live Count!!");
                     break;

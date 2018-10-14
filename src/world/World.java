@@ -13,7 +13,7 @@ import java.util.List;
 public class World {
     public int runX = 0;
     public int RUNX = 92;
-    public int lives = 5;
+    public int lives = 3;
     public int score = 0;
 
     public boolean runLeft = true;
