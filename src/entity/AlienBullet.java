@@ -1,6 +1,5 @@
 package entity;
 
-import output.GameFrame;
 import output.Renderer;
 import util.Util;
 import world.World;
@@ -39,7 +38,7 @@ public class AlienBullet extends Bullet {
         if (isAlive()) {
             setPosY(getPosY() + speed);
         }
-        if (getPosY_int() >= GameFrame.getWindowSizeY()) {
+        if (getPosY_int() >= Renderer.getWindowSizeY()) {
             this.setAlive(false);
         }
     }

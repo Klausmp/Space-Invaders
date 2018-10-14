@@ -1,9 +1,9 @@
 package entity;
 
-public class Wall extends Entity {
+public class Shield extends Entity {
     public int wallType;
 
-    public Wall(int posX, int posY, int wallType) {
+    public Shield(int posX, int posY, int wallType) {
         super(posX, posY);
         setWallType(wallType);
     }
@@ -20,12 +20,13 @@ public class Wall extends Entity {
 
     @Override
     public void movement() {
-
+        //noting 2 do here
     }
+
 
     @Override
     public void animation() {
-
+    //todo finde heraus wie die partikel der zerstörten blöcke funktionieren
     }
 
     public int getWallType() {
@@ -35,4 +36,5 @@ public class Wall extends Entity {
     public void setWallType(int wallType) {
         this.wallType = wallType;
     }
+
 }

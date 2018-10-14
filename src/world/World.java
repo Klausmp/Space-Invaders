@@ -1,11 +1,8 @@
 package world;
 
-import entity.Alien;
-import entity.Bullet;
-import entity.Item;
-import entity.Player;
+import entity.*;
 import input.Keyboard;
-import output.GameFrame;
+import output.Renderer;
 import util.Util;
 
 import java.awt.*;
@@ -16,7 +13,7 @@ import java.util.List;
 public class World {
     public int runX = 0;
     public int RUNX = 92;
-    public int lives = 3;
+    public int lives = 1;
     public int score = 0;
 
     public boolean runLeft = true;
@@ -30,10 +27,12 @@ public class World {
     public List<Alien> deadAlienList = new ArrayList<Alien>();
     public List<Player> playerList = new ArrayList<Player>();
     public List<Player> deadPlayerList = new ArrayList<Player>();
+    public List<Shield> shieldList = new ArrayList<Shield>();
+    public List<Shield> deadShieldList = new ArrayList<Shield>();
     public List<Item> itemList = new ArrayList<Item>();
 
     public World() {
-        for (int x = 50; x <= GameFrame.getWindowSizeX() - 76; x += 26) {
+        for (int x = 50; x <= Renderer.getWindowSizeX() - 76; x += 26) {
             for (int y = 30; y <= 55; y += 26) {
                 getAlienList().add(new Alien(x, y, 1));
             }
@@ -60,6 +59,9 @@ public class World {
             }
             for (Bullet bullet : getBulletList()) {
                 bullet.update();
+            }
+            for (Shield shield : getShieldList()) {
+                shield.update();
             }
             for (Item item : getItemList()) {
                 item.update();
@@ -95,13 +97,12 @@ public class World {
             resetAlien();
         }
         if (Keyboard.isKeyDown(KeyEvent.VK_ENTER) && getPlayerList().isEmpty() && getLives() > 0) {
-            getPlayerList().add(new Player((GameFrame.getWindowSizeX() / 2) - 12, 350));
+            getPlayerList().add(new Player((Renderer.getWindowSizeX() / 2) - 12, 350));
             setGameRunning(true);
         }
         if (getLives() <= 0) {
             remove();
         }
-
     }
 
     public void remove() {
@@ -116,6 +117,9 @@ public class World {
             for (Alien alien : world.getAlienList()) {
                 alien.setCanBeRemoved(true);
             }
+            for (Shield shield : world.getShieldList()) {
+                shield.setCanBeRemoved(true);
+            }
         }
     }
 
@@ -124,7 +128,7 @@ public class World {
         setRUNX(92);
         setRunLeft(true);
         setFirstRunn(true);
-        for (int x = 50; x <= GameFrame.getWindowSizeX() - 76; x += 26) {
+        for (int x = 50; x <= Renderer.getWindowSizeX() - 76; x += 26) {
             for (int y = 30; y <= 55; y += 26) {
                 getAlienList().add(new Alien(x, y, 1));
             }
@@ -148,10 +152,77 @@ public class World {
             for (Bullet bullet : getBulletList()) {
                 bullet.render(g);
             }
+            for (Shield shield : getShieldList()) {
+                shield.render(g);
+            }
             for (Item item : getItemList()) {
                 item.render(g);
             }
         }
+    }
+
+    public int getRunX() {
+        return runX;
+    }
+
+    public void setRunX(int runX) {
+        this.runX = runX;
+    }
+
+    public int getRUNX() {
+        return RUNX;
+    }
+
+    public void setRUNX(int RUNX) {
+        this.RUNX = RUNX;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public boolean isRunLeft() {
+        return runLeft;
+    }
+
+    public void setRunLeft(boolean runLeft) {
+        this.runLeft = runLeft;
+    }
+
+    public boolean isFirstRunn() {
+        return firstRunn;
+    }
+
+    public void setFirstRunn(boolean firstRunn) {
+        this.firstRunn = firstRunn;
+    }
+
+    public boolean isGameRunning() {
+        return isGameRunning;
+    }
+
+    public void setGameRunning(boolean gameRunning) {
+        isGameRunning = gameRunning;
+    }
+
+    public boolean isRendert() {
+        return isRendert;
+    }
+
+    public void setRendert(boolean rendert) {
+        isRendert = rendert;
     }
 
     public List<Bullet> getBulletList() {
@@ -202,76 +273,28 @@ public class World {
         this.deadPlayerList = deadPlayerList;
     }
 
+    public List<Shield> getShieldList() {
+        return shieldList;
+    }
+
+    public void setShieldList(List<Shield> shieldList) {
+        this.shieldList = shieldList;
+    }
+
+    public List<Shield> getDeadShieldList() {
+        return deadShieldList;
+    }
+
+    public void setDeadShieldList(List<Shield> deadShieldList) {
+        this.deadShieldList = deadShieldList;
+    }
+
     public List<Item> getItemList() {
         return itemList;
     }
 
     public void setItemList(List<Item> itemList) {
         this.itemList = itemList;
-    }
-
-    public int getRunX() {
-        return runX;
-    }
-
-    public void setRunX(int runX) {
-        this.runX = runX;
-    }
-
-    public int getRUNX() {
-        return RUNX;
-    }
-
-    public boolean isRunLeft() {
-        return runLeft;
-    }
-
-    public void setRunLeft(boolean runLeft) {
-        this.runLeft = runLeft;
-    }
-
-    public void setRUNX(int RUNX) {
-        this.RUNX = RUNX;
-    }
-
-    public boolean isFirstRunn() {
-        return firstRunn;
-    }
-
-    public void setFirstRunn(boolean firstRunn) {
-        this.firstRunn = firstRunn;
-    }
-
-    public boolean isGameRunning() {
-        return isGameRunning;
-    }
-
-    public void setGameRunning(boolean gameRunning) {
-        isGameRunning = gameRunning;
-    }
-
-    public int getLives() {
-        return lives;
-    }
-
-    public void setLives(int lives) {
-        this.lives = lives;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public boolean isRendert() {
-        return isRendert;
-    }
-
-    public void setRendert(boolean rendert) {
-        isRendert = rendert;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package main;
 
 import input.Keyboard;
-import output.GameFrame;
+
 import output.Renderer;
 import util.Util;
 import world.World;
@@ -39,7 +39,7 @@ public class GameLoop {
     }
 
     public void init() {
-        GameFrame frame = new GameFrame();
+        Renderer renderer = new Renderer();
         Keyboard keyboard = new Keyboard();
     }
 
@@ -89,7 +89,7 @@ public class GameLoop {
     }
 
     private static void gameRender() {
-        GameFrame.repaintScreen();
+        Renderer.repaintScreen();
     }
 
     private static void guiTick() {

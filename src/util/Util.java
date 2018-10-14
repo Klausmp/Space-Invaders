@@ -3,7 +3,9 @@ package util;
 import entity.Alien;
 import entity.Bullet;
 import entity.Player;
-import output.GameFrame;
+import entity.Shield;
+
+import output.Renderer;
 import world.World;
 
 import java.awt.*;
@@ -23,13 +25,13 @@ public class Util {
 
     public static void drawBackground(Graphics g, Color color) {
         g.setColor(color);
-        g.drawRect(0, 0, GameFrame.getWindowSizeX(), GameFrame.getWindowSizeY());
+        g.drawRect(0, 0, Renderer.getWindowSizeX(), Renderer.getWindowSizeY());
 
-        for (int i = 0; i <= GameFrame.getWindowSizeX(); i++) {
-            g.drawLine(i, 0, i, GameFrame.getWindowSizeY());
+        for (int i = 0; i <= Renderer.getWindowSizeX(); i++) {
+            g.drawLine(i, 0, i, Renderer.getWindowSizeY());
         }
         for (int i = 0; i <= 500; i++) {
-            g.drawLine(0, i, GameFrame.getWindowSizeX(), i);
+            g.drawLine(0, i, Renderer.getWindowSizeX(), i);
         }
 
     }
@@ -52,6 +54,11 @@ public class Util {
                     world.getDeadBulletList().add(bullet);
                 }
             }
+            for (Shield shield: world.getShieldList()) {
+                if (shield.isCanBeRemoved()){
+                    world.getDeadShieldList().add(shield);
+                }
+            }
             if (!world.getDeadPlayerList().isEmpty()) {
                 world.getPlayerList().removeAll(world.getDeadPlayerList());
                 world.getDeadPlayerList().clear();
@@ -64,9 +71,13 @@ public class Util {
                 world.getBulletList().removeAll(world.getDeadBulletList());
                 world.getDeadBulletList().clear();
             }
+            if (!world.getDeadShieldList().isEmpty()){
+                world.getShieldList().removeAll(world.getDeadShieldList());
+                world.getDeadShieldList().clear();
+            }
 
         }
-        if (!getDeadWorldList().isEmpty()){
+        if (!getDeadWorldList().isEmpty()) {
             getWorldList().removeAll(getDeadWorldList());
             deadWorldList.clear();
         }

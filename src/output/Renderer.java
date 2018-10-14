@@ -1,6 +1,14 @@
 package output;
 
+import input.Keyboard;
+import input.Mouse;
+import main.Main;
+import util.Util;
+import world.World;
+
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -8,7 +16,7 @@ import java.io.IOException;
  * @author Klausmp
  */
 
-public class Renderer {
+public class Renderer extends JFrame {
 
     public static BufferedImage ship;
     public static BufferedImage shipDead0;
@@ -26,9 +34,133 @@ public class Renderer {
     public static BufferedImage alien3_0;
     public static BufferedImage alien3_1;
     public static BufferedImage alienDestroyed;
+    //TODO add shield textures
 
+    public static int windowSizeX;
+    public static int windowSizeY;
+
+    public static JFrame gameFrame = new JFrame();
+
+    public static JPanel gamePanel = new JPanel();
+
+    public static Screen screen = new Screen();
 
     public Renderer() {
+        loadTextures();
+        /*Pannels*/
+
+        //GamePannel
+        getGamePanel().setLayout(new BorderLayout());
+        getGamePanel().add(getScreen(), BorderLayout.CENTER);
+
+        /*Configurations*/
+
+        //Windowsize ETC
+        resizeWindow(400, 400);
+
+        //Screen
+        getScreen().setVisible(true);
+
+        //GameFrame
+        getGameFrame().setTitle(Main.gameTitle);
+        getGameFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        getGameFrame().setLocationRelativeTo(null);
+        getGameFrame().setResizable(false);
+        getGameFrame().setLayout(new BorderLayout());
+        getGameFrame().add(getGamePanel(), BorderLayout.CENTER);
+        getGameFrame().addKeyListener(new Keyboard());
+        getGameFrame().addMouseListener(new Mouse());
+        getGameFrame().setVisible(true);
+
+
+        /*Buttons*/
+
+
+    }
+
+    static class Screen extends JLabel {
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Renderer.background(g);
+            Renderer.gameLayer(g);
+            Renderer.guiLayer(g);
+        }
+    }
+
+    private static void background(Graphics g) {
+        Util.drawBackground(g, Color.BLACK);
+        g.setColor(Color.GREEN);
+        g.drawLine(0, 369, getWindowSizeX(), 369);
+        g.drawLine(0, 370, getWindowSizeX(), 370);
+
+    }
+
+    public static void guiLayer(Graphics g) {
+        for (World world : Util.getWorldList()) {
+            if (Util.getWorldList().isEmpty()) {
+                g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
+                g.drawString("Press Enter to Start", 121, 300);
+            }
+            if (!world.isGameRunning()) {
+                g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
+                g.drawString("Press Enter to Continue", 106, 300);
+            }
+        }
+        g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 9));
+        for (World world : Util.getWorldList()) {
+            g.drawString("L I V E S :", 0, getWindowSizeY() - 43);
+            switch (world.getLives()) {
+                case 3:
+                    g.drawImage(Renderer.getShipLives(), 50, getWindowSizeY() - 50, null);
+                    g.drawImage(Renderer.getShipLives(), 65, getWindowSizeY() - 50, null);
+                    g.drawImage(Renderer.getShipLives(), 80, getWindowSizeY() - 50, null);
+                    break;
+                case 2:
+                    g.drawImage(Renderer.getShipLives(), 50, getWindowSizeY() - 50, null);
+                    g.drawImage(Renderer.getShipLives(), 65, getWindowSizeY() - 50, null);
+                    break;
+                case 1:
+                    g.drawImage(Renderer.getShipLives(), 50, getWindowSizeY() - 50, null);
+                    break;
+                default:
+                    System.out.println("Wrong Live Count!!");
+                    break;
+            }
+        }
+        g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 15));
+        g.drawString("SCORE: ", 25, 15);
+        for (World world : Util.getWorldList()) {
+            g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 15));
+            g.drawString("" + world.getScore(), 125, 15);
+        }
+    }
+
+    public static void gameLayer(Graphics g) {
+        for (World world : Util.getWorldList()) {
+            world.render(g);
+        }
+    }
+
+    public static void resizeWindow(int wight, int height) {
+        if (Util.getScreenSize().getWidth() == 1360 && Util.getScreenSize().getHeight() == 768) {
+            wight = (wight + 2) - 10;
+            height = (height + 2) + 12;
+        }
+        if (Util.getScreenSize().getWidth() == 1920 && Util.getScreenSize().getHeight() == 1080) {
+            wight = (wight + 2);
+            height = (height + 2) + 23;
+        }
+        if (Util.getScreenSize().getWidth() == 1280 && Util.getScreenSize().getHeight() == 720) {
+            wight = (wight + 2);
+            height = (height + 2) + 23;
+        }
+        getScreen().setBounds(0, 0, wight, height);
+        getGameFrame().setSize(wight, height);
+        setWindowSizeX(wight);
+        setWindowSizeY(height);
+    }
+
+    public static void loadTextures(){
         try {
             //Alien
             alien1_0 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien1_0.png"));
@@ -57,7 +189,10 @@ public class Renderer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void repaintScreen() {
+        screen.repaint(0, 0, windowSizeX, windowSizeY);
     }
 
     public static BufferedImage getShip() {
@@ -68,20 +203,28 @@ public class Renderer {
         Renderer.ship = ship;
     }
 
-    public static BufferedImage getPlayerShot() {
-        return shipShot;
+    public static BufferedImage getShipDead0() {
+        return shipDead0;
     }
 
-    public static void setPlayerShot(BufferedImage playerShot) {
-        Renderer.shipShot = playerShot;
+    public static void setShipDead0(BufferedImage shipDead0) {
+        Renderer.shipDead0 = shipDead0;
     }
 
-    public static BufferedImage getAlien2_0() {
-        return alien2_0;
+    public static BufferedImage getShipDead1() {
+        return shipDead1;
     }
 
-    public static void setAlien2_0(BufferedImage alien2_0) {
-        Renderer.alien2_0 = alien2_0;
+    public static void setShipDead1(BufferedImage shipDead1) {
+        Renderer.shipDead1 = shipDead1;
+    }
+
+    public static BufferedImage getShipLives() {
+        return shipLives;
+    }
+
+    public static void setShipLives(BufferedImage shipLives) {
+        Renderer.shipLives = shipLives;
     }
 
     public static BufferedImage getShipShot() {
@@ -124,6 +267,30 @@ public class Renderer {
         Renderer.alienBulledDead = alienBulledDead;
     }
 
+    public static BufferedImage getAlien1_0() {
+        return alien1_0;
+    }
+
+    public static void setAlien1_0(BufferedImage alien1_0) {
+        Renderer.alien1_0 = alien1_0;
+    }
+
+    public static BufferedImage getAlien1_1() {
+        return alien1_1;
+    }
+
+    public static void setAlien1_1(BufferedImage alien1_1) {
+        Renderer.alien1_1 = alien1_1;
+    }
+
+    public static BufferedImage getAlien2_0() {
+        return alien2_0;
+    }
+
+    public static void setAlien2_0(BufferedImage alien2_0) {
+        Renderer.alien2_0 = alien2_0;
+    }
+
     public static BufferedImage getAlien2_1() {
         return alien2_1;
     }
@@ -156,43 +323,43 @@ public class Renderer {
         Renderer.alienDestroyed = alienDestroyed;
     }
 
-    public static BufferedImage getAlien1_0() {
-        return alien1_0;
+    public static int getWindowSizeX() {
+        return windowSizeX;
     }
 
-    public static void setAlien1_0(BufferedImage alien1_0) {
-        Renderer.alien1_0 = alien1_0;
+    public static void setWindowSizeX(int windowSizeX) {
+        Renderer.windowSizeX = windowSizeX;
     }
 
-    public static BufferedImage getAlien1_1() {
-        return alien1_1;
+    public static int getWindowSizeY() {
+        return windowSizeY;
     }
 
-    public static void setAlien1_1(BufferedImage alien1_1) {
-        Renderer.alien1_1 = alien1_1;
+    public static void setWindowSizeY(int windowSizeY) {
+        Renderer.windowSizeY = windowSizeY;
     }
 
-    public static BufferedImage getShipDead0() {
-        return shipDead0;
+    public static JFrame getGameFrame() {
+        return gameFrame;
     }
 
-    public static void setShipDead0(BufferedImage shipDead0) {
-        Renderer.shipDead0 = shipDead0;
+    public static void setGameFrame(JFrame gameFrame) {
+        Renderer.gameFrame = gameFrame;
     }
 
-    public static BufferedImage getShipDead1() {
-        return shipDead1;
+    public static JPanel getGamePanel() {
+        return gamePanel;
     }
 
-    public static void setShipDead1(BufferedImage shipDead1) {
-        Renderer.shipDead1 = shipDead1;
+    public static void setGamePanel(JPanel gamePanel) {
+        Renderer.gamePanel = gamePanel;
     }
 
-    public static BufferedImage getShipLives() {
-        return shipLives;
+    public static Screen getScreen() {
+        return screen;
     }
 
-    public static void setShipLives(BufferedImage shipLives) {
-        Renderer.shipLives = shipLives;
+    public static void setScreen(Screen screen) {
+        Renderer.screen = screen;
     }
 }

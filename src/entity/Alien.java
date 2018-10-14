@@ -107,13 +107,13 @@ public class Alien extends Entity {
             for (World world : Util.getWorldList()) {
                 switch (getAlienType()) {
                     case 1:
-                        world.setScore(world.getScore() + 30);
+                        world.setScore(world.getScore() + 50);
                         break;
                     case 2:
-                        world.setScore(world.getScore() + 20);
+                        world.setScore(world.getScore() + 40);
                         break;
                     case 3:
-                        world.setScore(world.getScore() + 10);
+                        world.setScore(world.getScore() + 20);
                         break;
                     default:
                         System.out.println("Wrong Alien Type!! (Dead Animation)");
