@@ -82,6 +82,7 @@ public class Renderer extends JFrame {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Renderer.background(g);
+
             Renderer.gameLayer(g);
             Renderer.guiLayer(g);
         }
