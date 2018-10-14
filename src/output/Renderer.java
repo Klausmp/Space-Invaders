@@ -96,11 +96,13 @@ public class Renderer extends JFrame {
     }
 
     public static void guiLayer(Graphics g) {
+
+        if (Util.getWorldList().isEmpty()) {
+            g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
+            System.out.println("works");
+            g.drawString("Press Enter to Start", 121, 300);
+        }
         for (World world : Util.getWorldList()) {
-            if (Util.getWorldList().isEmpty()) {
-                g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
-                g.drawString("Press Enter to Start", 121, 300);
-            }
             if (!world.isGameRunning()) {
                 g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
                 g.drawString("Press Enter to Continue", 106, 300);
@@ -160,7 +162,7 @@ public class Renderer extends JFrame {
         setWindowSizeY(height);
     }
 
-    public static void loadTextures(){
+    public static void loadTextures() {
         try {
             //Alien
             alien1_0 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/alien1_0.png"));
