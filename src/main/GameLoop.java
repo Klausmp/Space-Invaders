@@ -52,7 +52,6 @@ public class GameLoop {
         nsPerRenderTick = 1D / FPS * 1000000000D;
         then = System.nanoTime();
         while (true) {
-            System.out.println(Util.getWorldList().isEmpty());
             now = System.nanoTime();
             unprocessed += (now - then) / nsPerTick;
             unprocessedRender += (now - then) / nsPerRenderTick;

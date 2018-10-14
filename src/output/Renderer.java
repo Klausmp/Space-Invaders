@@ -100,7 +100,6 @@ public class Renderer extends JFrame {
 
         if (Util.getWorldList().isEmpty()) {
             g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
-            System.out.println("works");
             g.drawString("Press Enter to Start", 121, 300);
         }
         for (World world : Util.getWorldList()) {
