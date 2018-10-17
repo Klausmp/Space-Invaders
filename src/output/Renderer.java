@@ -200,7 +200,7 @@ public class Renderer extends JFrame {
 
             //Item
 
-            //Shield
+            //ShieldTile
             shield = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/shield.png"));
             shield_0_0 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/shield_0_0.png"));
             shield_0_3 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/shield_0_3.png"));

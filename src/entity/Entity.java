@@ -21,11 +21,11 @@ public abstract class Entity {
     public Entity() {
     }
 
-    public Entity(int posX, int posY) {
+    public Entity(int posX, int posY, boolean loadAndSetTextures, boolean setBounds) {
         setPosX(posX);
         setPosY(posY);
-        loadAndSetTextures();
-        setBounds();
+        if (loadAndSetTextures) loadAndSetTextures();
+        if (setBounds) setBounds();
     }
 
     public Entity(int posX, int posY, double speed) {

@@ -1,9 +1,6 @@
 package util;
 
-import entity.Alien;
-import entity.Bullet;
-import entity.Player;
-import entity.Shield;
+import entity.*;
 
 import output.Renderer;
 import world.World;
@@ -54,8 +51,13 @@ public class Util {
                     world.getDeadBulletList().add(bullet);
                 }
             }
-            for (Shield shield: world.getShieldList()) {
-                if (shield.isCanBeRemoved()){
+            for (Shield shield : world.getShieldList()) {
+                for (ShieldTile shieldTile : shield.getShieldTileList()) {
+                    if (shieldTile.isCanBeRemoved()) {
+                        shield.getDeadShieldTileList().add(shieldTile);
+                    }
+                }
+                if (shield.canBeRemoved) {
                     world.getDeadShieldList().add(shield);
                 }
             }
@@ -71,7 +73,13 @@ public class Util {
                 world.getBulletList().removeAll(world.getDeadBulletList());
                 world.getDeadBulletList().clear();
             }
-            if (!world.getDeadShieldList().isEmpty()){
+            for (Shield shield : world.getShieldList()) {
+                if (!shield.getDeadShieldTileList().isEmpty()) {
+                    shield.getShieldTileList().removeAll(shield.getDeadShieldTileList());
+                    shield.getDeadShieldTileList().clear();
+                }
+            }
+            if (!world.getDeadShieldList().isEmpty()) {
                 world.getShieldList().removeAll(world.getDeadShieldList());
                 world.getDeadShieldList().clear();
             }

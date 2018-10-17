@@ -29,9 +29,12 @@ public abstract class Bullet extends Entity {
     public void hitWall() {
         for (World world : Util.getWorldList()) {
             for (Shield shield : world.getShieldList()) {
-                if (getBounding().intersects(shield.getBounding())){
-                    shield.setCanBeRemoved(true);
-                    setAlive(false);
+                for (ShieldTile shieldTile : shield.getShieldTileList()) {
+                    if (getBounding().intersects(shieldTile.getBounding())) {
+                        shieldTile.setCanBeRemoved(true);
+                        setAlive(false);
+                    }
+
                 }
             }
         }

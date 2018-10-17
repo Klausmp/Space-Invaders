@@ -3,7 +3,7 @@ package entity;
 public class Item extends Entity {
 
     public Item(int posX, int posY) {
-        super(posX, posY);
+        super(posX, posY, false, false);
     }
 
     @Override

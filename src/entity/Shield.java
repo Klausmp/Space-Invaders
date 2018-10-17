@@ -1,60 +1,61 @@
 package entity;
 
-import output.Renderer;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Shield extends Entity {
-    public int wallType;
+    public List<ShieldTile> shieldTileList = new ArrayList<ShieldTile>();
+    public List<ShieldTile> deadShieldTileList = new ArrayList<ShieldTile>();
 
-    public Shield(int posX, int posY, int wallType) {
-        setPosX(posX);
-        setPosY(posY);
-        setWallType(wallType);
-        loadAndSetTextures();
-        setBounds();
+
+    public Shield(int posX, int posY) {
+        super(posX, posY, false, false);
+        shieldTileList.add(new ShieldTile(100, 100, 2));
     }
 
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void loadAndSetTextures() {
-        switch (getWallType()) {
-            case 1:
-                setLook(Renderer.getShield());
-                break;
-            case 2:
-                setLook(Renderer.getShield_0_0());
-                break;
-            case 3:
-                setLook(Renderer.getShield_0_3());
-                break;
-            case 4:
-                setLook(Renderer.getShield_3_0());
-                break;
-            case 5:
-                setLook(Renderer.getShield_3_3());
-                break;
+    public void render(Graphics g) {
+        for (ShieldTile shieldTile : getShieldTileList()) {
+            shieldTile.render(g);
         }
     }
 
     @Override
-    public void movement() {
-        //noting 2 do here
+    public void update() {
+        for (ShieldTile shieldTile : getShieldTileList()) {
+            shieldTile.update();
+        }
+    }
+
+    @Override
+    public void loadAndSetTextures() {
+
     }
 
 
     @Override
+    public void movement() {
+
+    }
+
+    @Override
     public void animation() {
-        //todo finde heraus wie die partikel der zerstörten blöcke funktionieren
+
     }
 
-    public int getWallType() {
-        return wallType;
+    public List<ShieldTile> getShieldTileList() {
+        return shieldTileList;
     }
 
-    public void setWallType(int wallType) {
-        this.wallType = wallType;
+    public void setShieldTileList(List<ShieldTile> shieldTileList) {
+        this.shieldTileList = shieldTileList;
+    }
+
+    public List<ShieldTile> getDeadShieldTileList() {
+        return deadShieldTileList;
+    }
+
+    public void setDeadShieldTileList(List<ShieldTile> deadShieldTileList) {
+        this.deadShieldTileList = deadShieldTileList;
     }
 }

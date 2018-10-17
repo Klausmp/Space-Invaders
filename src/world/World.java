@@ -108,6 +108,9 @@ public class World {
                 alien.setCanBeRemoved(true);
             }
             for (Shield shield : world.getShieldList()) {
+                for (ShieldTile shieldTile : shield.getShieldTileList()) {
+                    shieldTile.setCanBeRemoved(true);
+                }
                 shield.setCanBeRemoved(true);
             }
         }
@@ -118,7 +121,9 @@ public class World {
         setRUNX(92);
         setRunLeft(true);
         setFirstRunn(true);
-
+        getShieldList().add(new Shield(1, 1));
+        getAlienList().add(new Alien(10000, 1000, 1));
+        /*
         for (int x = 50; x <= Renderer.getWindowSizeX() - 76; x += 26) {
             for (int y = 30; y <= 55; y += 26) {
                 getAlienList().add(new Alien(x, y, 1));
@@ -129,7 +134,7 @@ public class World {
             for (int y = 109; y <= 159; y += 26) {
                 getAlienList().add(new Alien(x, y, 3));
             }
-        }
+        }*/
     }
 
     public void render(Graphics g) {
