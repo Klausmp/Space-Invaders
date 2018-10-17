@@ -20,6 +20,7 @@ public abstract class Entity {
 
     public Entity() {
     }
+
     public Entity(int posX, int posY) {
         setPosX(posX);
         setPosY(posY);
@@ -97,7 +98,7 @@ public abstract class Entity {
         return posX;
     }
 
-    public int getPosX_int(){
+    public int getPosX_int() {
         return (int) posX;
     }
 
@@ -109,7 +110,7 @@ public abstract class Entity {
         return posY;
     }
 
-    public int getPosY_int(){
+    public int getPosY_int() {
         return (int) posY;
     }
 

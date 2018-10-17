@@ -8,7 +8,6 @@ import world.World;
 import world.WorldOne;
 
 import java.awt.event.KeyEvent;
-import java.sql.SQLOutput;
 
 /**
  * @author Klausmp
@@ -113,7 +112,6 @@ public class GameLoop {
             setCurrentTick(1);
         }
     }
-
 
     public static int getCurrentTick() {
         return currentTick;

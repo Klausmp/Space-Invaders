@@ -1,7 +1,11 @@
 package entity;
 
-public abstract class Bullet extends Entity{
+import util.Util;
+import world.World;
+
+public abstract class Bullet extends Entity {
     public boolean isPlayerBullet = false;
+
     public Bullet(int posX, int posY, boolean isPlayerBullet) {
         super(posX, posY, 6);
         setPlayerBullet(isPlayerBullet);
@@ -20,6 +24,19 @@ public abstract class Bullet extends Entity{
         setBounds();
         animation();
         hit();
+    }
+
+    public void hitWall() {
+        for (World world : Util.getWorldList()) {
+            for (Shield shield : world.getShieldList()) {
+                if (getBounding().intersects(shield.getBounding())){
+                    shield.setCanBeRemoved(true);
+                    setAlive(false);
+                }
+            }
+        }
+
+
     }
 
     public boolean isPlayerBullet() {

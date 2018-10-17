@@ -34,7 +34,13 @@ public class Renderer extends JFrame {
     public static BufferedImage alien3_0;
     public static BufferedImage alien3_1;
     public static BufferedImage alienDestroyed;
-    //TODO add shield textures
+    public static BufferedImage shield;
+    public static BufferedImage shield_0_0;
+    public static BufferedImage shield_0_3;
+    public static BufferedImage shield_3_0;
+    public static BufferedImage shield_3_3;
+
+    //TODO add destroyed shield-textures
 
     public static int windowSizeX;
     public static int windowSizeY;
@@ -76,6 +82,10 @@ public class Renderer extends JFrame {
         /*Buttons*/
 
 
+    }
+
+    public static void repaintScreen(){
+        getScreen().repaint();
     }
 
     static class Screen extends JLabel {
@@ -190,13 +200,15 @@ public class Renderer extends JFrame {
 
             //Item
 
+            //Shield
+            shield = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/shield.png"));
+            shield_0_0 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/shield_0_0.png"));
+            shield_0_3 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/shield_0_3.png"));
+            shield_3_0 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/shield_3_0.png"));
+            shield_3_3 = ImageIO.read(Renderer.class.getClassLoader().getResourceAsStream("gfx/shield_3_3.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void repaintScreen() {
-        screen.repaint(0, 0, windowSizeX, windowSizeY);
     }
 
     public static BufferedImage getShip() {
@@ -325,6 +337,46 @@ public class Renderer extends JFrame {
 
     public static void setAlienDestroyed(BufferedImage alienDestroyed) {
         Renderer.alienDestroyed = alienDestroyed;
+    }
+
+    public static BufferedImage getShield() {
+        return shield;
+    }
+
+    public static void setShield(BufferedImage shield) {
+        Renderer.shield = shield;
+    }
+
+    public static BufferedImage getShield_0_0() {
+        return shield_0_0;
+    }
+
+    public static void setShield_0_0(BufferedImage shield_0_0) {
+        Renderer.shield_0_0 = shield_0_0;
+    }
+
+    public static BufferedImage getShield_0_3() {
+        return shield_0_3;
+    }
+
+    public static void setShield_0_3(BufferedImage shield_0_3) {
+        Renderer.shield_0_3 = shield_0_3;
+    }
+
+    public static BufferedImage getShield_3_0() {
+        return shield_3_0;
+    }
+
+    public static void setShield_3_0(BufferedImage shield_3_0) {
+        Renderer.shield_3_0 = shield_3_0;
+    }
+
+    public static BufferedImage getShield_3_3() {
+        return shield_3_3;
+    }
+
+    public static void setShield_3_3(BufferedImage shield_3_3) {
+        Renderer.shield_3_3 = shield_3_3;
     }
 
     public static int getWindowSizeX() {

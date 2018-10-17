@@ -3,7 +3,7 @@ package main;
 /**
  * @author Klausmp
  */
-//TODO game over screen
+//TODO add game over screen
 
 public class Main {
     public static final String gameTitle = "Space Invaders";
@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
         gameLoop.init();
         gameLoop.run();
+
     }
 
     public static String getGameTitle() {

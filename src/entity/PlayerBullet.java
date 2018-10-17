@@ -58,9 +58,8 @@ public class PlayerBullet extends Bullet {
                     this.setAlive(false);
                 }
             }
-
-
         }
+        hitWall();
     }
 
     public int getAnimationTimer() {
