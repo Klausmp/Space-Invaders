@@ -6,15 +6,22 @@ import world.World;
 
 
 public class Alien extends Entity {
+    //Legt fest ob die Animation läuft oder nicht
     public boolean animationRunning = false;
+    //Legt fest ob die Animation in Status eins oder zwei ist
     public boolean animationStatus = true;
+    //Legt fest nach wie vielen Ticks die Anomation beeginnt, damit nicht alle Animationen simultan sind
     public int animationStart = 0;
     public int ANIMATIONSTART = (int) ((Math.random() * 89) + 1);
+    //Legt fest wie lange die Todesanimation abgespielt wird
     public int deadAnimationTimer = 0;
     public final int DEADANIMATIONTIMER = 5;
-    public int alienType = 0;
+    //Legt fest zu welchem Alien Typ der Alien gehört (1-3). Davon ist die Anzahl der Punkte abhänig und auch die Textur
+    public int alienType;
+    //Legt die dauer eines Durchlaufes der Animation fest
     public final int ANIMATIONTIMER = 30;
     public int animationTimer = 0;
+    //Legt fest in welchem Abstand der Alien versuchen kann einen Schuss abzugeben
     public final int SHOTDELAY = 10;
     public int shotDelay = 0;
 
@@ -23,7 +30,7 @@ public class Alien extends Entity {
         setPosY(posY);
         setAlienType(alienType);
         setSpeed(0.5);
-        loadAndSetTextures();
+        setStartTexture();
         setBounds();
 
     }
@@ -125,7 +132,7 @@ public class Alien extends Entity {
     }
 
     @Override
-    public void loadAndSetTextures() {
+    public void setStartTexture() {
         switch (getAlienType()) {
             case 1:
                 setLook(Renderer.getAlien1_0());
