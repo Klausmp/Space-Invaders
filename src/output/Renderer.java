@@ -139,7 +139,7 @@ public class Renderer extends JFrame {
         }
 
         g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 15));
-        g.drawString("SCORE: ", 25, 15);
+        g.drawString("SCORE: ", 0, 15);
         for (World world : Util.getWorldList()) {
             g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 15));
             g.drawString("" + world.getScore(), 125, 15);
