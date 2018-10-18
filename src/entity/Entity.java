@@ -5,17 +5,24 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity {
 
+    // X und Y Koordinaten der Entity (Position im Raum)
     public double posX;
     public double posY;
+    //Geschwindigkeit der Entity bei Bewegungen
     public double speed;
+    //Höhe und Breite der Entity (wird von der Größe der Textur übernommen, gillt auch für Bounding)
     public int wight;
     public int height;
 
+    //Sagt aus ob die Entity lebendig ist oder nicht
     public boolean isAlive = true;
+    //Sagt aus ob die Entity gelöscht werden kann oder nicht
     public boolean canBeRemoved = false;
 
+    //Textur die auf den Screeen angezeigt wird
     public BufferedImage look;
 
+    //Hitbox der Entity
     public Rectangle bounding = new Rectangle();
 
     public Entity() {
@@ -24,7 +31,7 @@ public abstract class Entity {
     public Entity(int posX, int posY, boolean loadAndSetTextures, boolean setBounds) {
         setPosX(posX);
         setPosY(posY);
-        if (loadAndSetTextures) loadAndSetTextures();
+        if (loadAndSetTextures) setStartTexture();
         if (setBounds) setBounds();
     }
 
@@ -32,22 +39,47 @@ public abstract class Entity {
         setPosX(posX);
         setPosY(posY);
         setSpeed(speed);
-        loadAndSetTextures();
+        setStartTexture();
         setBounds();
     }
 
+    /**
+     * Updatet die Entity bei jedem Tick
+     * (Muss in World.update() in der Liste,
+     * der jewaligen Entity aufgerufen werden)
+     */
     public abstract void update();
 
-    public abstract void loadAndSetTextures();
+    /**
+     * Legt die erste Textur fest muss (muss in update() aufgerufen werden)
+     */
+    public abstract void setStartTexture();
 
+    /**
+     * Setzt das Movemnet der Entity fest (muss in update() aufgerufen werden)
+     */
     public abstract void movement();
 
+    /**
+     *Steuert die Animation der Entity. Muss mit einme Timer fersehen werdern,
+     * um die richtige Zeit für den wechsel der Texturen zu erkennen
+     * (muss in update() auferufen werden)
+     */
     public abstract void animation();
 
+    /**
+     *Lässt Entity.look auf dem Screen an den x und y Koordinaten darstellen
+     * (Muss in World.render() in der Liste,
+     *der jewaligen Entity aufgerufen werden)
+     */
     public void render(Graphics g) {
         g.drawImage(getLook(), getPosX_int(), getPosY_int(), getWight(), getHeight(), null);
     }
 
+    /**
+     *Setzt die Hitbox auf den Aktuellen standort der Entity
+     * (muss in update() aufgerufen werden)
+     */
     public void setBounds() {
         setWight(getLook().getWidth());
         setHeight(getLook().getHeight());
