@@ -9,7 +9,7 @@ public class ShieldTile extends Entity {
         setPosX(posX);
         setPosY(posY);
         setWallType(wallType);
-        loadAndSetTextures();
+        setStartTexture();
         setBounds();
     }
 
@@ -19,7 +19,7 @@ public class ShieldTile extends Entity {
     }
 
     @Override
-    public void loadAndSetTextures() {
+    public void setStartTexture() {
         switch (getWallType()) {
             case 1:
                 setLook(Renderer.getShield());

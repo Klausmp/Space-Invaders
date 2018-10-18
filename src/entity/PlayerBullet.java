@@ -18,7 +18,7 @@ public class PlayerBullet extends Bullet {
     }
 
     @Override
-    public void loadAndSetTextures() {
+    public void setStartTexture() {
         look = Renderer.getShipShot();
     }
 

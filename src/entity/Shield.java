@@ -28,7 +28,7 @@ public class Shield extends Entity {
     }
 
     @Override
-    public void loadAndSetTextures() {
+    public void setStartTexture() {
 
     }
 

@@ -30,7 +30,7 @@ public class AlienBullet extends Bullet {
     }
 
     @Override
-    public void loadAndSetTextures() {
+    public void setStartTexture() {
         look = Renderer.getAlienBullet0();
     }
 

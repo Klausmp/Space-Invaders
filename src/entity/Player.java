@@ -30,7 +30,7 @@ public class Player extends Entity {
     }
 
     @Override
-    public void loadAndSetTextures() {
+    public void setStartTexture() {
         look = Renderer.getShip();
     }
 

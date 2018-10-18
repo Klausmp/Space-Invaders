@@ -12,7 +12,7 @@ public class Item extends Entity {
     }
 
     @Override
-    public void loadAndSetTextures() {
+    public void setStartTexture() {
 
     }
 
