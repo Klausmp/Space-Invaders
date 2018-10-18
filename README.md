@@ -1,7 +1,9 @@
 # Space-Invaders by [@Klausmp](https://twitter.com/Klausmp2000)
 
 \######################
-   Controls (English) 
+
+\# Controls (English) \# 
+   
 \######################
 
  - Move to the left: A ore arrow Key to the left 
