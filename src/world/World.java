@@ -10,6 +10,10 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Klausmp
+ */
+
 public abstract class World {
     public int runX = 0;
     public int RUNX = 92;
@@ -29,7 +33,6 @@ public abstract class World {
     public List<Player> deadPlayerList = new ArrayList<Player>();
     public List<Shield> shieldList = new ArrayList<Shield>();
     public List<Shield> deadShieldList = new ArrayList<Shield>();
-    public List<Item> itemList = new ArrayList<Item>();
 
     public World() {
 
@@ -40,27 +43,30 @@ public abstract class World {
             if (!player.isAlive()) {
                 setGameRunning(false);
             }
+
             if (!getAlienList().isEmpty())
                 player.update();
         }
+
         if (isGameRunning()) {
             for (Alien alien : getAlienList()) {
                 alien.update();
             }
+
             for (Bullet bullet : getBulletList()) {
                 bullet.update();
             }
+
             for (Shield shield : getShieldList()) {
                 shield.update();
             }
-            for (Item item : getItemList()) {
-                item.update();
-            }
+
             if (getRUNX() <= getRunX()) {
                 setRunX(0);
                 for (Alien alien : getAlienList()) {
                     alien.setPosY(alien.getPosY() + (alien.height * 0.8));
                 }
+
                 if (isRunLeft()) {
                     setRunLeft(false);
                     setFirstRunn(false);
@@ -70,6 +76,7 @@ public abstract class World {
                     setFirstRunn(false);
                 }
             }
+
             if (!isFirstRunn()) {
                 setRUNX(184);
             }
@@ -79,17 +86,21 @@ public abstract class World {
                 getDeadBulletList().add(bullet);
             }
         }
+
         if (getAlienList().isEmpty()) {
             setGameRunning(false);
         }
+
         if (Keyboard.isKeyDown(KeyEvent.VK_ENTER) && getAlienList().isEmpty()) {
             setGameRunning(true);
             resetAlien();
         }
+
         if (Keyboard.isKeyDown(KeyEvent.VK_ENTER) && getPlayerList().isEmpty() && getLives() > 0) {
             getPlayerList().add(new Player((Renderer.getWindowSizeX() / 2) - 12, 350));
             setGameRunning(true);
         }
+
         if (getLives() <= 0) {
             remove();
         }
@@ -101,12 +112,15 @@ public abstract class World {
             for (Player player : world.getPlayerList()) {
                 player.setCanBeRemoved(true);
             }
+
             for (Bullet bullet : world.getBulletList()) {
                 bullet.setCanBeRemoved(true);
             }
+
             for (Alien alien : world.getAlienList()) {
                 alien.setCanBeRemoved(true);
             }
+
             for (Shield shield : world.getShieldList()) {
                 for (ShieldTile shieldTile : shield.getShieldTileList()) {
                     shieldTile.setCanBeRemoved(true);
@@ -121,17 +135,17 @@ public abstract class World {
             for (Alien alien : getAlienList()) {
                 alien.render(g);
             }
+
             for (Player player : getPlayerList()) {
                 player.render(g);
             }
+
             for (Bullet bullet : getBulletList()) {
                 bullet.render(g);
             }
+
             for (Shield shield : getShieldList()) {
                 shield.render(g);
-            }
-            for (Item item : getItemList()) {
-                item.render(g);
             }
         }
     }
@@ -269,21 +283,25 @@ public abstract class World {
         this.deadShieldList = deadShieldList;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
-    }
-
     @Override
     public String toString() {
         return "World{" +
                 "runX=" + runX +
                 ", RUNX=" + RUNX +
+                ", lives=" + lives +
+                ", score=" + score +
                 ", runLeft=" + runLeft +
                 ", firstRunn=" + firstRunn +
+                ", isGameRunning=" + isGameRunning +
+                ", isRendert=" + isRendert +
+                ", bulletList=" + bulletList +
+                ", deadBulletList=" + deadBulletList +
+                ", alienList=" + alienList +
+                ", deadAlienList=" + deadAlienList +
+                ", playerList=" + playerList +
+                ", deadPlayerList=" + deadPlayerList +
+                ", shieldList=" + shieldList +
+                ", deadShieldList=" + deadShieldList +
                 '}';
     }
 }

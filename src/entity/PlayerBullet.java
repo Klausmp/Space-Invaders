@@ -4,8 +4,11 @@ import output.Renderer;
 import util.Util;
 import world.World;
 
-public class PlayerBullet extends Bullet {
+/**
+ * @author Klausmp
+ */
 
+public class PlayerBullet extends Bullet {
     public int animationTimer = 0;
     public final int ANIMATIONTIMER = 7;
 
@@ -27,7 +30,8 @@ public class PlayerBullet extends Bullet {
         if (isAlive()) {
             setPosY(getPosY() - speed);
         }
-        if (getPosY_int() <= 20) {
+
+        if ((int) getPosY() <= 20) {
             this.setAlive(false);
         }
     }
@@ -38,6 +42,7 @@ public class PlayerBullet extends Bullet {
             look = Renderer.getShipShotDead();
             setAnimationTimer(getAnimationTimer() + 1);
         }
+
         if (getANIMATIONTIMER() <= getAnimationTimer()){
             setCanBeRemoved(true);
         }
@@ -52,6 +57,7 @@ public class PlayerBullet extends Bullet {
                     this.setCanBeRemoved(true);
                 }
             }
+
             for (Bullet bullet : world.getBulletList()) {
                 if (bounding.intersects(bullet.bounding) && bullet != this && isAlive() && bullet.isAlive) {
                     bullet.setAlive(false);
@@ -77,13 +83,17 @@ public class PlayerBullet extends Bullet {
     @Override
     public String toString() {
         return "PlayerBullet{" +
-                "isPlayerBullet=" + isPlayerBullet +
+                "animationTimer=" + animationTimer +
+                ", ANIMATIONTIMER=" + ANIMATIONTIMER +
+                ", isPlayerBullet=" + isPlayerBullet +
                 ", posX=" + posX +
                 ", posY=" + posY +
+                ", speed=" + speed +
                 ", wight=" + wight +
                 ", height=" + height +
                 ", isAlive=" + isAlive +
                 ", canBeRemoved=" + canBeRemoved +
+                ", look=" + look +
                 ", bounding=" + bounding +
                 '}';
     }

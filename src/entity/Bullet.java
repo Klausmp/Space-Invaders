@@ -3,6 +3,10 @@ package entity;
 import util.Util;
 import world.World;
 
+/**
+ * @author Klausmp
+ */
+
 public abstract class Bullet extends Entity {
     public boolean isPlayerBullet = false;
 
@@ -48,5 +52,21 @@ public abstract class Bullet extends Entity {
 
     public void setPlayerBullet(boolean playerBullet) {
         isPlayerBullet = playerBullet;
+    }
+
+    @Override
+    public String toString() {
+        return "Bullet{" +
+                "isPlayerBullet=" + isPlayerBullet +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                ", speed=" + speed +
+                ", wight=" + wight +
+                ", height=" + height +
+                ", isAlive=" + isAlive +
+                ", canBeRemoved=" + canBeRemoved +
+                ", look=" + look +
+                ", bounding=" + bounding +
+                '}';
     }
 }

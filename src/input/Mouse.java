@@ -10,7 +10,6 @@ import java.awt.event.MouseListener;
 public class Mouse implements MouseListener {
     public static int[] mousePos = new int[]{0, 0};
 
-
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -26,7 +25,6 @@ public class Mouse implements MouseListener {
         mousePos[0] = e.getX();
         mousePos[1] = e.getY();
         //System.out.println(GameFrame.mousePos[0] + " " + GameFrame.mousePos[1]);
-
     }
 
     @Override
@@ -48,9 +46,6 @@ public class Mouse implements MouseListener {
     }
 
     public static void setMousePos(int[] mousePos) {
-        mousePos = mousePos;
+        Mouse.mousePos = mousePos;
     }
-
-
 }
-

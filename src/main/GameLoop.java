@@ -1,7 +1,6 @@
 package main;
 
 import input.Keyboard;
-
 import output.Renderer;
 import util.Util;
 import world.World;
@@ -14,7 +13,6 @@ import java.awt.event.KeyEvent;
  */
 
 public class GameLoop {
-
     public static Renderer renderer = new Renderer();
 
     private static boolean gameRunning = true;
@@ -61,6 +59,7 @@ public class GameLoop {
                     gameTick();
                     gameTicks();
                 }
+
                 guiTick();
                 setTps(getTps() + 1);
                 setUnprocessed(getUnprocessed() - 1);
@@ -71,13 +70,13 @@ public class GameLoop {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             gameRender();
             while (getUnprocessedRender() >= 1) {
                 gameRender();
                 setFps(getFps() + 1);
                 setUnprocessedRender(getUnprocessedRender() - 1);
             }
-
 
             if (System.currentTimeMillis() - getFpsTimer() >= 1000) {
                 System.out.println("FPS: " + getFps());
@@ -100,6 +99,7 @@ public class GameLoop {
         for (World world : Util.getWorldList()) {
             world.update();
         }
+
         if (Util.getWorldList().isEmpty() && Keyboard.isKeyDown(KeyEvent.VK_ENTER)) {
 
             Util.getWorldList().add(new WorldOne());
@@ -113,12 +113,12 @@ public class GameLoop {
         }
     }
 
-    public static int getCurrentTick() {
-        return currentTick;
+    public static Renderer getRenderer() {
+        return renderer;
     }
 
-    public static void setCurrentTick(int currentTick) {
-        GameLoop.currentTick = currentTick;
+    public static void setRenderer(Renderer renderer) {
+        GameLoop.renderer = renderer;
     }
 
     public static boolean isGameRunning() {
@@ -201,6 +201,14 @@ public class GameLoop {
         GameLoop.tps = tps;
     }
 
+    public static int getCurrentTick() {
+        return currentTick;
+    }
+
+    public static void setCurrentTick(int currentTick) {
+        GameLoop.currentTick = currentTick;
+    }
+
     public static int getTPS() {
         return TPS;
     }
@@ -208,5 +216,4 @@ public class GameLoop {
     public static int getFPS() {
         return FPS;
     }
-
 }

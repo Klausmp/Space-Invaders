@@ -4,10 +4,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Klausmp
+ */
+
 public class Shield extends Entity {
     public List<ShieldTile> shieldTileList = new ArrayList<ShieldTile>();
     public List<ShieldTile> deadShieldTileList = new ArrayList<ShieldTile>();
-
 
     public Shield(int posX, int posY) {
         super(posX, posY, false, false);
@@ -58,4 +61,6 @@ public class Shield extends Entity {
     public void setDeadShieldTileList(List<ShieldTile> deadShieldTileList) {
         this.deadShieldTileList = deadShieldTileList;
     }
+
+
 }

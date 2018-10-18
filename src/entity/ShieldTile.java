@@ -2,13 +2,17 @@ package entity;
 
 import output.Renderer;
 
+/**
+ * @author Klausmp
+ */
+
 public class ShieldTile extends Entity {
-    public int wallType;
+    public int shieldType;
 
     public ShieldTile(int posX, int posY, int wallType) {
         setPosX(posX);
         setPosY(posY);
-        setWallType(wallType);
+        setShieldType(wallType);
         setStartTexture();
         setBounds();
     }
@@ -20,7 +24,7 @@ public class ShieldTile extends Entity {
 
     @Override
     public void setStartTexture() {
-        switch (getWallType()) {
+        switch (getShieldType()) {
             case 1:
                 setLook(Renderer.getShield());
                 break;
@@ -41,20 +45,35 @@ public class ShieldTile extends Entity {
 
     @Override
     public void movement() {
-        //noting 2 do here
-    }
 
+    }
 
     @Override
     public void animation() {
         //todo finde heraus wie die partikel der zerstörten blöcke funktionieren
     }
 
-    public int getWallType() {
-        return wallType;
+    public int getShieldType() {
+        return shieldType;
     }
 
-    public void setWallType(int wallType) {
-        this.wallType = wallType;
+    public void setShieldType(int shieldType) {
+        this.shieldType = shieldType;
+    }
+
+    @Override
+    public String toString() {
+        return "ShieldTile{" +
+                "shieldType=" + shieldType +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                ", speed=" + speed +
+                ", wight=" + wight +
+                ", height=" + height +
+                ", isAlive=" + isAlive +
+                ", canBeRemoved=" + canBeRemoved +
+                ", look=" + look +
+                ", bounding=" + bounding +
+                '}';
     }
 }

@@ -10,7 +10,6 @@ import java.awt.event.KeyListener;
 public class Keyboard implements KeyListener {
     private static boolean[] keys = new boolean[512];
 
-
     public static boolean isKeyDown(int keyCode) {
         return keyCode >= 0 && keyCode < keys.length && keys[keyCode];
     }

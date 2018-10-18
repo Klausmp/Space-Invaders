@@ -17,7 +17,6 @@ import java.io.IOException;
  */
 
 public class Renderer extends JFrame {
-
     public static BufferedImage ship;
     public static BufferedImage shipDead0;
     public static BufferedImage shipDead1;
@@ -78,9 +77,7 @@ public class Renderer extends JFrame {
         getGameFrame().addMouseListener(new Mouse());
         getGameFrame().setVisible(true);
 
-
         /*Buttons*/
-
 
     }
 
@@ -92,7 +89,6 @@ public class Renderer extends JFrame {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Renderer.background(g);
-
             Renderer.gameLayer(g);
             Renderer.guiLayer(g);
         }
@@ -103,21 +99,21 @@ public class Renderer extends JFrame {
         g.setColor(Color.GREEN);
         g.drawLine(0, 369, getWindowSizeX(), 369);
         g.drawLine(0, 370, getWindowSizeX(), 370);
-
     }
 
     public static void guiLayer(Graphics g) {
-
         if (Util.getWorldList().isEmpty()) {
             g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
             g.drawString("Press Enter to Start", 121, 300);
         }
+
         for (World world : Util.getWorldList()) {
             if (!world.isGameRunning()) {
                 g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 17));
                 g.drawString("Press Enter to Continue", 106, 300);
             }
         }
+
         g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 9));
         for (World world : Util.getWorldList()) {
             g.drawString("L I V E S :", 0, getWindowSizeY() - 43);
@@ -141,6 +137,7 @@ public class Renderer extends JFrame {
                     break;
             }
         }
+
         g.setFont(new Font(g.getFont().getName(), Font.PLAIN, 15));
         g.drawString("SCORE: ", 25, 15);
         for (World world : Util.getWorldList()) {
@@ -160,14 +157,17 @@ public class Renderer extends JFrame {
             wight = (wight + 2) - 10;
             height = (height + 2) + 12;
         }
+
         if (Util.getScreenSize().getWidth() == 1920 && Util.getScreenSize().getHeight() == 1080) {
             wight = (wight + 2);
             height = (height + 2) + 23;
         }
+
         if (Util.getScreenSize().getWidth() == 1280 && Util.getScreenSize().getHeight() == 720) {
             wight = (wight + 2);
             height = (height + 2) + 23;
         }
+
         getScreen().setBounds(0, 0, wight, height);
         getGameFrame().setSize(wight, height);
         setWindowSizeX(wight);
@@ -417,5 +417,15 @@ public class Renderer extends JFrame {
 
     public static void setScreen(Screen screen) {
         Renderer.screen = screen;
+    }
+
+    @Override
+    public String toString() {
+        return "Renderer{" +
+                "rootPane=" + rootPane +
+                ", rootPaneCheckingEnabled=" + rootPaneCheckingEnabled +
+                ", accessibleContext=" + accessibleContext +
+                ", accessibleContext=" + accessibleContext +
+                '}';
     }
 }

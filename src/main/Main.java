@@ -4,10 +4,8 @@ package main;
  * @author Klausmp
  */
 //TODO add game over screen
-//TODO Dokumentation für Alien
 //TODO Dokumentation für AlienBullet
 //TODO Dokumentation für Item
-//TODO Dokumentation für PLayer
 //TODO Dokumentation für PlayerBullet
 //TODO Dokumentation für Shield
 //TODO Dokumentation für ShieldTile
@@ -18,7 +16,6 @@ package main;
 //TODO Dokumentation für World
 //TODO Dokumentation für World One
 
-
 public class Main {
     public static final String gameTitle = "Space Invaders";
     public static int highScore = 0;
@@ -27,7 +24,6 @@ public class Main {
     public static void main(String[] args) {
         gameLoop.init();
         gameLoop.run();
-
     }
 
     public static String getGameTitle() {
@@ -41,4 +37,14 @@ public class Main {
     public static void setHighScore(int highScore) {
         Main.highScore = highScore;
     }
+
+    public static GameLoop getGameLoop() {
+        return gameLoop;
+    }
+
+    public static void setGameLoop(GameLoop gameLoop) {
+        Main.gameLoop = gameLoop;
+    }
+
+
 }

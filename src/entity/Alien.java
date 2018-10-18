@@ -4,6 +4,9 @@ import output.Renderer;
 import util.Util;
 import world.World;
 
+/**
+ * @author Klausmp
+ */
 
 public class Alien extends Entity {
     //Legt fest ob die Animation läuft oder nicht
@@ -47,7 +50,6 @@ public class Alien extends Entity {
         shoot();
     }
 
-
     //Zuständig für das schießen des Alien
     public void shoot() {
         //Prüft ob der Delay für einen Schuss zu ende ist
@@ -57,7 +59,7 @@ public class Alien extends Entity {
             setShotDelay(0);
             //Initazalisiert einen Schuss
             for (World world : Util.getWorldList()) {
-                world.getBulletList().add(new AlienBullet(getPosX_int() + (getWight() / 2), getPosY_int() - getHeight()));
+                world.getBulletList().add(new AlienBullet(((int) getPosX()) + (getWight() / 2), ((int) getPosY()) - getHeight()));
             }
         }
         //Wenn der Timer für einen Schuss größer als der Delay ist wieder der Timer wieder auf 0 gesetzt
@@ -200,24 +202,48 @@ public class Alien extends Entity {
         }
     }
 
-    public int getSHOTDELAY() {
-        return SHOTDELAY;
-    }
-
-    public int getShotDelay() {
-        return shotDelay;
-    }
-
-    public void setShotDelay(int shotDelay) {
-        this.shotDelay = shotDelay;
-    }
-
     public boolean isAnimationRunning() {
         return animationRunning;
     }
 
     public void setAnimationRunning(boolean animationRunning) {
         this.animationRunning = animationRunning;
+    }
+
+    public boolean isAnimationStatus() {
+        return animationStatus;
+    }
+
+    public void setAnimationStatus(boolean animationStatus) {
+        this.animationStatus = animationStatus;
+    }
+
+    public int getAnimationStart() {
+        return animationStart;
+    }
+
+    public void setAnimationStart(int animationStart) {
+        this.animationStart = animationStart;
+    }
+
+    public int getANIMATIONSTART() {
+        return ANIMATIONSTART;
+    }
+
+    public void setANIMATIONSTART(int ANIMATIONSTART) {
+        this.ANIMATIONSTART = ANIMATIONSTART;
+    }
+
+    public int getDeadAnimationTimer() {
+        return deadAnimationTimer;
+    }
+
+    public void setDeadAnimationTimer(int deadAnimationTimer) {
+        this.deadAnimationTimer = deadAnimationTimer;
+    }
+
+    public int getDEADANIMATIONTIMER() {
+        return DEADANIMATIONTIMER;
     }
 
     public int getAlienType() {
@@ -240,51 +266,41 @@ public class Alien extends Entity {
         this.animationTimer = animationTimer;
     }
 
-    public boolean isAnimationStatus() {
-        return animationStatus;
+    public int getSHOTDELAY() {
+        return SHOTDELAY;
     }
 
-    public void setAnimationStatus(boolean animationStatus) {
-        this.animationStatus = animationStatus;
+    public int getShotDelay() {
+        return shotDelay;
     }
 
-    public int getDeadAnimationTimer() {
-        return deadAnimationTimer;
-    }
-
-    public void setDeadAnimationTimer(int deadAnimationTimer) {
-        this.deadAnimationTimer = deadAnimationTimer;
-    }
-
-    public int getDEADANIMATIONTIMER() {
-        return DEADANIMATIONTIMER;
-    }
-
-    public int getAnimationStart() {
-        return animationStart;
-    }
-
-    public void setAnimationStart(int animationStart) {
-        this.animationStart = animationStart;
-    }
-
-    public int getANIMATIONSTART() {
-        return ANIMATIONSTART;
-    }
-
-    public void setANIMATIONSTART(int ANIMATIONSTART) {
-        this.ANIMATIONSTART = ANIMATIONSTART;
+    public void setShotDelay(int shotDelay) {
+        this.shotDelay = shotDelay;
     }
 
     @Override
     public String toString() {
         return "Alien{" +
-                "alienType=" + alienType +
+                "animationRunning=" + animationRunning +
+                ", animationStatus=" + animationStatus +
+                ", animationStart=" + animationStart +
+                ", ANIMATIONSTART=" + ANIMATIONSTART +
+                ", deadAnimationTimer=" + deadAnimationTimer +
+                ", DEADANIMATIONTIMER=" + DEADANIMATIONTIMER +
+                ", alienType=" + alienType +
+                ", ANIMATIONTIMER=" + ANIMATIONTIMER +
+                ", animationTimer=" + animationTimer +
+                ", SHOTDELAY=" + SHOTDELAY +
                 ", shotDelay=" + shotDelay +
                 ", posX=" + posX +
                 ", posY=" + posY +
                 ", speed=" + speed +
+                ", wight=" + wight +
+                ", height=" + height +
                 ", isAlive=" + isAlive +
+                ", canBeRemoved=" + canBeRemoved +
+                ", look=" + look +
+                ", bounding=" + bounding +
                 '}';
     }
 }

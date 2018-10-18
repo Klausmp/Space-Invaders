@@ -2,13 +2,15 @@ package world;
 
 import entity.Alien;
 import entity.Shield;
-import output.Renderer;
+
+/**
+ * @author Klausmp
+ */
 
 public class WorldOne extends World {
     public WorldOne() {
         entityFormation();
     }
-
 
     @Override
     public void update() {
@@ -40,5 +42,27 @@ public class WorldOne extends World {
         setRunLeft(true);
         setFirstRunn(true);
         entityFormation();
+    }
+
+    @Override
+    public String toString() {
+        return "WorldOne{" +
+                "runX=" + runX +
+                ", RUNX=" + RUNX +
+                ", lives=" + lives +
+                ", score=" + score +
+                ", runLeft=" + runLeft +
+                ", firstRunn=" + firstRunn +
+                ", isGameRunning=" + isGameRunning +
+                ", isRendert=" + isRendert +
+                ", bulletList=" + bulletList +
+                ", deadBulletList=" + deadBulletList +
+                ", alienList=" + alienList +
+                ", deadAlienList=" + deadAlienList +
+                ", playerList=" + playerList +
+                ", deadPlayerList=" + deadPlayerList +
+                ", shieldList=" + shieldList +
+                ", deadShieldList=" + deadShieldList +
+                '}';
     }
 }

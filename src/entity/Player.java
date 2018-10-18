@@ -7,6 +7,10 @@ import world.World;
 
 import java.awt.event.KeyEvent;
 
+/**
+ * @author Klausmp
+ */
+
 public class Player extends Entity {
     //Legt fest wie lange die Todesanimation abgespielt wird und bis der Player gelöscht wird
     public int deadAnimationTimer = 0;
@@ -96,6 +100,7 @@ public class Player extends Entity {
             setCanBeRemoved(true);
         }
     }
+
     //Abgabe von Schüssen
     public void shot() {
         //Prüft ob der Spieler schießen kann
@@ -104,11 +109,12 @@ public class Player extends Entity {
             if (Keyboard.isKeyDown(KeyEvent.VK_SPACE) || Keyboard.isKeyDown(KeyEvent.VK_W) || Keyboard.isKeyDown(KeyEvent.VK_UP)) {
                 for (World world : Util.getWorldList()) {
                     //Initalisiert einen neuen schuss in der mitte des Spielers
-                    world.bulletList.add(new PlayerBullet(getPosX_int() + (getWight() / 2 - 3), getPosY_int()));
+                    world.bulletList.add(new PlayerBullet(((int) getPosX()) + (getWight() / 2 - 3), ((int) getPosY())));
                 }
             }
         }
     }
+
     //Prüfung ob der Spieler einen schuss abgeben kann
     public boolean canShoot() {
         for (World world : Util.getWorldList()) {
@@ -159,12 +165,19 @@ public class Player extends Entity {
     @Override
     public String toString() {
         return "Player{" +
+                "deadAnimationTimer=" + deadAnimationTimer +
+                ", DEADANIMATIONTIMER=" + DEADANIMATIONTIMER +
+                ", animationTimer=" + animationTimer +
+                ", ANIMATIONTIMER=" + ANIMATIONTIMER +
+                ", animationStatus=" + animationStatus +
                 ", posX=" + posX +
                 ", posY=" + posY +
                 ", speed=" + speed +
                 ", wight=" + wight +
                 ", height=" + height +
                 ", isAlive=" + isAlive +
+                ", canBeRemoved=" + canBeRemoved +
+                ", look=" + look +
                 ", bounding=" + bounding +
                 '}';
     }

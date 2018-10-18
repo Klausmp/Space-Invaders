@@ -4,6 +4,10 @@ import output.Renderer;
 import util.Util;
 import world.World;
 
+/**
+ * @author Klausmp
+ */
+
 public class AlienBullet extends Bullet {
     public int deadAnimationTimer = 0;
     public final int DEADANIMATIONTIMER = 7;
@@ -26,6 +30,7 @@ public class AlienBullet extends Bullet {
                 }
             }
         }
+
         hitWall();
     }
 
@@ -39,7 +44,8 @@ public class AlienBullet extends Bullet {
         if (isAlive()) {
             setPosY(getPosY() + speed);
         }
-        if (getPosY_int() >= Renderer.getWindowSizeY()) {
+
+        if ((int) getPosY() >= Renderer.getWindowSizeY()) {
             this.setAlive(false);
         }
     }
@@ -58,10 +64,12 @@ public class AlienBullet extends Bullet {
                 setAnimationTimer(0);
             }
         }
+
         if (!isAlive()) {
             look = Renderer.getAlienBulledDead();
             setDeadAnimationTimer(getDeadAnimationTimer() + 1);
         }
+
         if (getDEADANIMATIONTIMER() <= getDeadAnimationTimer()) {
             setCanBeRemoved(true);
         }
@@ -104,6 +112,9 @@ public class AlienBullet extends Bullet {
         return "AlienBullet{" +
                 "deadAnimationTimer=" + deadAnimationTimer +
                 ", DEADANIMATIONTIMER=" + DEADANIMATIONTIMER +
+                ", animationTimer=" + animationTimer +
+                ", ANIMATIONTIMER=" + ANIMATIONTIMER +
+                ", animationStatus=" + animationStatus +
                 ", isPlayerBullet=" + isPlayerBullet +
                 ", posX=" + posX +
                 ", posY=" + posY +
@@ -112,6 +123,7 @@ public class AlienBullet extends Bullet {
                 ", height=" + height +
                 ", isAlive=" + isAlive +
                 ", canBeRemoved=" + canBeRemoved +
+                ", look=" + look +
                 ", bounding=" + bounding +
                 '}';
     }
