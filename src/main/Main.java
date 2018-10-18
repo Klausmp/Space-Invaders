@@ -4,6 +4,20 @@ package main;
  * @author Klausmp
  */
 //TODO add game over screen
+//TODO Dokumentation für Alien
+//TODO Dokumentation für AlienBullet
+//TODO Dokumentation für Item
+//TODO Dokumentation für PLayer
+//TODO Dokumentation für PlayerBullet
+//TODO Dokumentation für Shield
+//TODO Dokumentation für ShieldTile
+//TODO Dokumentation für GameLoop
+//TODO Dokumentation für Main
+//TODO Dokumentation für Renderer
+//TODO Dokumentation für Util
+//TODO Dokumentation für World
+//TODO Dokumentation für World One
+
 
 public class Main {
     public static final String gameTitle = "Space Invaders";
