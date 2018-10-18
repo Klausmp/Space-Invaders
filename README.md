@@ -1,8 +1,8 @@
 # Space-Invaders by @Klausmp 
 
-\*######################
-# Controls (English) #
-######################\*
+######################
+\#\ Controls (English) \#\
+######################
 
 -Move to the left: A ore arrow Key to the left
 -Move to the right: D ore arrow Key to the right
