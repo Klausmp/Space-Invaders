@@ -13,7 +13,7 @@ public class Alien extends Entity {
     //Legt fest nach wie vielen Ticks die Anomation beeginnt, damit nicht alle Animationen simultan sind
     public int animationStart = 0;
     public int ANIMATIONSTART = (int) ((Math.random() * 89) + 1);
-    //Legt fest wie lange die Todesanimation abgespielt wird
+    //Legt fest wie lange die Todesanimation abgespielt wird und bis der Alien gelöscht wird
     public int deadAnimationTimer = 0;
     public final int DEADANIMATIONTIMER = 5;
     //Legt fest zu welchem Alien Typ der Alien gehört (1-3). Davon ist die Anzahl der Punkte abhänig und auch die Textur
@@ -47,72 +47,105 @@ public class Alien extends Entity {
         shoot();
     }
 
+
+    //Zuständig für das schießen des Alien
     public void shoot() {
+        //Prüft ob der Delay für einen Schuss zu ende ist
+        //Check Ob eine Random zahl zwischen 1 und 110 == 50 ist, wenn beides zutrifft wird ein schuss abgegeben
         if ((int) (Math.random() * 109 + 1) == 50 && getSHOTDELAY() <= getShotDelay()) {
+            //Setzt den Delay für Schüsse wieder auf 0 zurück
             setShotDelay(0);
+            //Initazalisiert einen Schuss
             for (World world : Util.getWorldList()) {
                 world.getBulletList().add(new AlienBullet(getPosX_int() + (getWight() / 2), getPosY_int() - getHeight()));
             }
         }
+        //Wenn der Timer für einen Schuss größer als der Delay ist wieder der Timer wieder auf 0 gesetzt
         if (getSHOTDELAY() <= getShotDelay()) {
             setShotDelay(0);
         }
+        //Erhöt den Timer um 1
         setShotDelay(getShotDelay() + 1);
     }
 
     @Override
     public void animation() {
+        //Prüft ob die Animation schon begonnen hat
         if (!isAnimationRunning()) {
+            //Erhöht den Animatiostimmer um 1
             setAnimationStart(getAnimationStart() + 1);
+            //Prüft ob der Delay für denStart der Animation abgelaufen ist
             if (getANIMATIONSTART() <= getAnimationStart()) {
+                //Startet die Amimation
                 setAnimationRunning(true);
             }
         }
+        //Prüfung ob die Animation leuft
         if (isAnimationRunning()) {
+            //Prüft welche Art von ALien Voeliegt
             switch (getAlienType()) {
                 case 1:
+                    //Prüfung welche Stelle der Animation gerade vorliegt
                     if (isAnimationStatus()) {
+                        //Setung der Stufe 1 der Animation
                         setLook(Renderer.getAlien1_0());
                     } else {
+                        //Setzung der Stufe 2 der Animation
                         setLook(Renderer.getAlien1_1());
                     }
                     break;
                 case 2:
+                    //Prüfung welche Stelle der Animation gerade vorliegt
                     if (isAnimationStatus()) {
+                        //Setung der Stufe 1 der Animation
                         setLook(Renderer.getAlien2_0());
                     } else {
+                        //Setzung der Stufe 2 der Animation
                         setLook(Renderer.getAlien2_1());
                     }
                     break;
                 case 3:
+                    //Prüfung welche Stelle der Animation gerade vorliegt
                     if (isAnimationStatus()) {
+                        //Setung der Stufe 1 der Animation
                         setLook(Renderer.getAlien3_0());
                     } else {
+                        //Setzung der Stufe 2 der Animation
                         setLook(Renderer.getAlien3_1());
                     }
                     break;
                 default:
+                    //Default mit Fehlermeldung und setung einer festen Textur (Nur bei der Auswahl eines falschen AlienTypes)
                     System.out.println("Wrong Alien Type!! (Animation)");
                     setLook(Renderer.getAlien2_0());
                     break;
             }
+            //Testet ob der Animationstimer größer als der Delay zum ändern des Animatios Staus ist
             if (getAnimationTimer() >= getANIMATIONTIMER()) {
+                //Setzt den Timer wieder auf 0 zurück
                 setAnimationTimer(0);
+                //Ändert den Status der Animation in den entgegegesetzten Status
                 if (isAnimationStatus()) {
                     setAnimationStatus(false);
                 } else {
                     setAnimationStatus(true);
                 }
             }
+            //Erhöht denAnimationsTImer um 1
             setAnimationTimer(getAnimationTimer() + 1);
         }
+        //Schaut ob der Alien gestorben ist
         if (!isAlive()) {
+            //Setzt look auf die Exlosionstextur
             setLook(Renderer.getAlienDestroyed());
+            //Erhöt den DeadAnimationsTimer um 1
             setDeadAnimationTimer(getDeadAnimationTimer() + 1);
         }
+        //Prüfung ob das Limit des deadAnimationTimeres erricht ist
         if (getDEADANIMATIONTIMER() <= getDeadAnimationTimer()) {
             for (World world : Util.getWorldList()) {
                 switch (getAlienType()) {
+                    //Erhöht den Score jenacch AlienTyp
                     case 1:
                         world.setScore(world.getScore() + 50);
                         break;
@@ -123,16 +156,19 @@ public class Alien extends Entity {
                         world.setScore(world.getScore() + 20);
                         break;
                     default:
+                        //Fehlermeldung bei falschem AlienTyp
                         System.out.println("Wrong Alien Type!! (Dead Animation)");
                         break;
                 }
             }
+            //Gibt den Alien zur Entfernung frei
             setCanBeRemoved(true);
         }
     }
 
     @Override
     public void setStartTexture() {
+        //Setzt die Richtige StartTextur je nacch AlienTyp
         switch (getAlienType()) {
             case 1:
                 setLook(Renderer.getAlien1_0());
@@ -144,7 +180,9 @@ public class Alien extends Entity {
                 setLook(Renderer.getAlien3_0());
                 break;
             default:
+                //Fehlermeldung bei falschem AlienTyp
                 System.out.println("Wrong Alien Type!! (Init)");
+                //Setzt die StandartAlienTextur
                 setLook(Renderer.getAlien2_0());
                 break;
         }
@@ -153,6 +191,7 @@ public class Alien extends Entity {
     @Override
     public void movement() {
         for (World world : Util.getWorldList()) {
+            //Lässt je nach Status die Aliens nach Lings oder Rechts laufen
             if (world.isRunLeft()) {
                 setPosX(getPosX() - getSpeed());
             } else {
@@ -240,12 +279,12 @@ public class Alien extends Entity {
     @Override
     public String toString() {
         return "Alien{" +
-                "animationRunning=" + animationRunning +
-                ", animationStatus=" + animationStatus +
-                ", animationStart=" + animationStart +
-                ", ANIMATIONSTART=" + ANIMATIONSTART +
-                ", ANIMATIONTIMER=" + ANIMATIONTIMER +
-                ", animationTimer=" + animationTimer +
+                "alienType=" + alienType +
+                ", shotDelay=" + shotDelay +
+                ", posX=" + posX +
+                ", posY=" + posY +
+                ", speed=" + speed +
+                ", isAlive=" + isAlive +
                 '}';
     }
 }
