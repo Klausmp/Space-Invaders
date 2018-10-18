@@ -45,8 +45,8 @@ public class Player extends Entity {
             }
             if (Keyboard.isKeyDown(KeyEvent.VK_RIGHT) || Keyboard.isKeyDown(KeyEvent.VK_D)) {
                 setPosX(getPosX() + getSpeed());
-                if (getPosX() >= Renderer.getWindowSizeX() - getWight() - 16) {
-                    setPosX(Renderer.getWindowSizeX() - getWight() - 16);
+                if (getPosX() >= Renderer.getWindowSizeX() - getWight() - 7) {
+                    setPosX(Renderer.getWindowSizeX() - getWight() - 7);
                 }
             }
             setBounds();
@@ -56,12 +56,12 @@ public class Player extends Entity {
     @Override
     public void animation() {
         if (!isAlive()) {
-            if (getANIMATIONTIMER() <= getAnimationTimer()){
+            if (getANIMATIONTIMER() <= getAnimationTimer()) {
                 setAnimationTimer(0);
-                if (isAnimationStatus()){
+                if (isAnimationStatus()) {
                     setLook(Renderer.getShipDead0());
                     setAnimationStatus(false);
-                }else {
+                } else {
                     setLook(Renderer.getShipDead1());
                     setAnimationStatus(true);
                 }
@@ -70,7 +70,7 @@ public class Player extends Entity {
         }
         setAnimationTimer(getAnimationTimer() + 1);
         if (getDEADANIMATIONTIMER() <= getDeadAnimationTimer()) {
-            for (World world: Util.getWorldList()) {
+            for (World world : Util.getWorldList()) {
                 world.setLives(world.getLives() - 1);
             }
             setCanBeRemoved(true);
