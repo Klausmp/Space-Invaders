@@ -6,6 +6,17 @@ import output.Renderer;
 
 public class WorldOne extends World {
     public WorldOne() {
+        entityFormation();
+    }
+
+
+    @Override
+    public void update() {
+        super.update();
+    }
+
+    @Override
+    public void entityFormation() {
         getShieldList().add(new Shield(1, 1));
         getAlienList().add(new Alien(10000, 1000, 1));
         /*
@@ -23,7 +34,11 @@ public class WorldOne extends World {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void resetAlien() {
+        setRunX(0);
+        setRUNX(92);
+        setRunLeft(true);
+        setFirstRunn(true);
+        entityFormation();
     }
 }
