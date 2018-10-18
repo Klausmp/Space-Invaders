@@ -1,4 +1,4 @@
-# Space-Invaders by [@Klausmp] (https://twitter.com/Klausmp2000)
+# Space-Invaders by [@Klausmp](https://twitter.com/Klausmp2000)
 
 \######################
    Controls (English) 
