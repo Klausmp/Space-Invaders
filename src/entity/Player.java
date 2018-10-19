@@ -4,7 +4,6 @@ import input.Keyboard;
 import output.Renderer;
 import util.Util;
 import world.World;
-
 import java.awt.event.KeyEvent;
 
 /**
@@ -78,7 +77,7 @@ public class Player extends Entity {
             if (getANIMATIONTIMER() <= getAnimationTimer()) {
                 //Setzt den Animationstimer auf 0
                 setAnimationTimer(0);
-                //Negiert die Texturen
+                //Negiert die Texturen der Animation
                 if (isAnimationStatus()) {
                     setLook(Renderer.getShipDead0());
                     setAnimationStatus(false);
@@ -87,6 +86,7 @@ public class Player extends Entity {
                     setAnimationStatus(true);
                 }
             }
+            setDeadAnimationTimer(getDeadAnimationTimer() + 1);
         }
         //Erhöt den deadAnimationTimer um 1
         setAnimationTimer(getAnimationTimer() + 1);
@@ -96,6 +96,7 @@ public class Player extends Entity {
                 //Entfern ein leben
                 world.setLives(world.getLives() - 1);
             }
+            System.out.println("ofe");
             //Gibt den Player zur Entfernung frei
             setCanBeRemoved(true);
         }
