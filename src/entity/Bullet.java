@@ -30,7 +30,7 @@ public abstract class Bullet extends Entity {
         hit();
     }
 
-    public void hitWall() {
+    public void hitShield() {
         for (World world : Util.getWorldList()) {
             for (Shield shield : world.getShieldList()) {
                 for (ShieldTile shieldTile : shield.getShieldTileList()) {
@@ -42,8 +42,6 @@ public abstract class Bullet extends Entity {
                 }
             }
         }
-
-
     }
 
     public boolean isPlayerBullet() {
