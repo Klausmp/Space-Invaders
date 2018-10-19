@@ -13,25 +13,26 @@ import java.util.List;
  */
 
 public class Util {
+    //Erkennung der Displayauflösung
     public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
+    //Liste in der die Welt gespeichert wird
     public static List<World> worldList = new ArrayList<World>();
+    //Liste zur entfernung von Elementen aus der nicht "dead" Liste
     public static List<World> deadWorldList = new ArrayList<World>();
 
+    //Screen Layer für den Hintergrund (hinterste Ebene)
     public static void drawBackground(Graphics g, Color color) {
+        //Setung der Farbe für den Hintergrunf
         g.setColor(color);
+        //Zeichnung eines Rechhteckes am Rand des Fensters
         g.drawRect(0, 0, Renderer.getWindowSizeX(), Renderer.getWindowSizeY());
-
+        //Zeichnet so viele Lienien vom oberene bis zum unteren ende des Bildes (in der Größe des Fensters)
         for (int i = 0; i <= Renderer.getWindowSizeX(); i++) {
             g.drawLine(i, 0, i, Renderer.getWindowSizeY());
         }
-
-        for (int i = 0; i <= 500; i++) {
-            g.drawLine(0, i, Renderer.getWindowSizeX(), i);
-        }
-
     }
 
+    //Entfernung aller Listenelemente und somit Löschung aller Entitys
     public static void clearLists() {
         for (World world : Util.getWorldList()) {
             for (Player player : world.getPlayerList()) {
