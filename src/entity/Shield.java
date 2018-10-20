@@ -35,7 +35,6 @@ public class Shield extends Entity {
 
     }
 
-
     @Override
     public void movement() {
 
@@ -61,6 +60,4 @@ public class Shield extends Entity {
     public void setDeadShieldTileList(List<ShieldTile> deadShieldTileList) {
         this.deadShieldTileList = deadShieldTileList;
     }
-
-
 }
