@@ -65,7 +65,7 @@ public class PlayerBullet extends Bullet {
                 }
             }
         }
-        hitWall();
+        hitShield();
     }
 
     public int getAnimationTimer() {
