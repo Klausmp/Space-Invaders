@@ -4,7 +4,6 @@ import entity.*;
 import input.Keyboard;
 import output.Renderer;
 import util.Util;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
