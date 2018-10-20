@@ -1,7 +1,6 @@
 package world;
 
 import entity.Alien;
-import entity.Shield;
 import output.Renderer;
 
 /**
