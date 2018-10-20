@@ -96,7 +96,6 @@ public class Player extends Entity {
                 //Entfern ein leben
                 world.setLives(world.getLives() - 1);
             }
-            System.out.println("ofe");
             //Gibt den Player zur Entfernung frei
             setCanBeRemoved(true);
         }
