@@ -14,7 +14,14 @@ public class Shield extends Entity {
 
     public Shield(int posX, int posY) {
         super(posX, posY, false, false);
-        shieldTileList.add(new ShieldTile(100, 100, 2));
+        shieldTileList.add(new ShieldTile((int) getPosX(), (int) getPosY(), 2));
+        shieldTileList.add(new ShieldTile((int) getPosX() + 14, (int) getPosY(), 1));
+        shieldTileList.add(new ShieldTile((int) getPosX() + 28, (int) getPosY(), 4));
+        shieldTileList.add(new ShieldTile((int) getPosX(), (int) getPosY() + 8, 1));
+        shieldTileList.add(new ShieldTile((int) getPosX() + 14, (int) getPosY() + 8, 1));
+        shieldTileList.add(new ShieldTile((int) getPosX() + 28, (int) getPosY() + 8, 1));
+        shieldTileList.add(new ShieldTile((int) getPosX(), (int) getPosY() + 16, 3));
+        shieldTileList.add(new ShieldTile((int) getPosX() + 28, (int) getPosY() + 16, 5));
     }
 
     public void render(Graphics g) {
