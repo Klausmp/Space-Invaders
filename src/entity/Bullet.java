@@ -34,7 +34,7 @@ public abstract class Bullet extends Entity {
         for (World world : Util.getWorldList()) {
             for (Shield shield : world.getShieldList()) {
                 for (ShieldTile shieldTile : shield.getShieldTileList()) {
-                    if (getBounding().intersects(shieldTile.getBounding())) {
+                    if (getBounding().intersects(shieldTile.getBounding()) && isAlive()) {
                         shieldTile.setCanBeRemoved(true);
                         setAlive(false);
                     }
