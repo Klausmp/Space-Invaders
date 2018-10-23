@@ -1,6 +1,7 @@
 package world;
 
 import entity.Alien;
+import entity.Shield;
 import output.Renderer;
 
 /**
@@ -9,7 +10,6 @@ import output.Renderer;
 
 public class WorldOne extends World {
     public WorldOne() {
-        entityFormation();
     }
 
     @Override
@@ -19,8 +19,10 @@ public class WorldOne extends World {
 
     @Override
     public void entityFormation() {
-        //getShieldList().add(new Shield(1, 1));
-        //getAlienList().add(new Alien(10000, 1000, 1));
+        getAlienList().add(new Alien(10000, 1000, 1));
+        getShieldList().add(new Shield(50, 320));
+        getShieldList().add(new Shield(172, 320));
+        getShieldList().add(new Shield(295, 320));
         for (int x = 50; x <= Renderer.getWindowSizeX() - 76; x += 26) {
             for (int y = 30; y <= 55; y += 26) {
                 getAlienList().add(new Alien(x, y, 1));
