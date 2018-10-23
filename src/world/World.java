@@ -34,7 +34,7 @@ public abstract class World {
     public List<Shield> deadShieldList = new ArrayList<Shield>();
 
     public World() {
-
+        entityFormation();
     }
 
     public void update() {
