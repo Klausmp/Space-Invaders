@@ -13,7 +13,7 @@ package main;
 //TODO Dokumentation für Renderer
 //TODO Dokumentation für World
 //TODO Dokumentation für World One
-
+//TODO Aimation Class
 public class Main {
     public static final String gameTitle = "Space Invaders";
     public static int highScore = 0;
