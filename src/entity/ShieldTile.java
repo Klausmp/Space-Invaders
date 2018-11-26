@@ -1,6 +1,6 @@
 package entity;
 
-import output.Renderer;
+import grafiks.Renderer;
 
 /**
  * @author Klausmp

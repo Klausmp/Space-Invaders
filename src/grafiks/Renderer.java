@@ -1,4 +1,4 @@
-package output;
+package grafiks;
 
 import input.Keyboard;
 import input.Mouse;

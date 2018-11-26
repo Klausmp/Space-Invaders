@@ -1,7 +1,7 @@
 package main;
 
 import input.Keyboard;
-import output.Renderer;
+import grafiks.Renderer;
 import util.Util;
 import world.World;
 import world.WorldOne;

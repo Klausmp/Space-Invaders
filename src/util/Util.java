@@ -1,7 +1,7 @@
 package util;
 
 import entity.*;
-import output.Renderer;
+import grafiks.Renderer;
 import world.World;
 
 import java.awt.*;
