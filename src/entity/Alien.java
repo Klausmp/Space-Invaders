@@ -28,6 +28,7 @@ public class Alien extends Entity {
     public final int SHOTDELAY = 10;
     public int shotDelay = 0;
 
+    //Construcktor mit auswahl des Alientyps (1 bis 3)
     public Alien(int posX, int posY, int alienType) {
         setPosX(posX);
         setPosY(posY);
@@ -38,11 +39,13 @@ public class Alien extends Entity {
 
     }
 
+    //Construcktor ohne Alyentyp auswahl (Standartwert ist 2)
     public Alien(int posX, int posY) {
         super(posX, posY, 0.5);
     }
 
     @Override
+    //Updatet das Alien bei jedem Tick
     public void update() {
         movement();
         setBounds();
@@ -119,7 +122,14 @@ public class Alien extends Entity {
                 default:
                     //Default mit Fehlermeldung und setung einer festen Textur (Nur bei der Auswahl eines falschen AlienTypes)
                     System.out.println("Wrong Alien Type!! (Animation)");
-                    setLook(Renderer.getAlien2_0());
+                    //Prüfung welche Stelle der Animation gerade vorliegt
+                    if (isAnimationStatus()) {
+                        //Setung der Stufe 1 der Animation
+                        setLook(Renderer.getAlien2_0());
+                    } else {
+                        //Setzung der Stufe 2 der Animation
+                        setLook(Renderer.getAlien2_1());
+                    }
                     break;
             }
             //Testet ob der Animationstimer größer als der Delay zum ändern des Animatios Staus ist
