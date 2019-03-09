@@ -1,6 +1,6 @@
 package entity;
 
-import grafiks.Renderer;
+import graphics.Renderer;
 import util.Util;
 import world.World;
 
@@ -8,6 +8,10 @@ import world.World;
  * @author Klausmp
  */
 
+//Aliens sind die fliegenden "monster die in Space-Invaderns Bekämpft werden.
+//Sie sind in 3 verschiedenen Warieanten vorhanden die beim Abschuss durch den
+//Spieler unterschiedlich viele Punkte geben. Die Aliens schießen auch auf den
+//Spieler zurrück
 public class Alien extends Entity {
     //Legt fest ob die Animation läuft oder nicht
     public boolean animationRunning = false;
@@ -30,26 +34,37 @@ public class Alien extends Entity {
 
     //Construcktor mit auswahl des Alientyps (1 bis 3)
     public Alien(int posX, int posY, int alienType) {
+        //Setzt die X-Position aus dem Construcktor auf die des Alien
         setPosX(posX);
+        //Setzt die Y-Position aus dem Construcktor auf die des Alien
         setPosY(posY);
+        //Setzt den Alientyp aus dem Construcktor auf die des Alien
         setAlienType(alienType);
+        //Setzt die Bewegungsfeschwindigkeit aus dem Construcktor auf die des Alien
         setSpeed(0.5);
+        //Setzt die  aus dem Construcktor auf die des Alien
         setStartTexture();
+        //Erstellt die Hitbox
         setBounds();
 
     }
 
     //Construcktor ohne Alyentyp auswahl (Standartwert ist 2)
     public Alien(int posX, int posY) {
+        //Übergiebt die werte an den Construcktor der Entity Oberklasse
         super(posX, posY, 0.5);
     }
 
     @Override
     //Updatet das Alien bei jedem Tick
     public void update() {
+        //Updatet das Movement des Aliens
         movement();
+        //Setzt die Hitbox des Aliens auf die Aktuelle Position
         setBounds();
+        //Updatet die Animationen
         animation();
+        //Prüft ob das Alien Schießt oder nicht
         shoot();
     }
 
